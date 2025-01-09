@@ -1,11 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { ProductComponent } from '../../components/product/product.component';
-
-interface Product {
-  imgSrc: string;
-  title: string;
-  price: number;
-}
+import {
+  Product,
+  ProductComponent,
+} from '../../components/product/product.component';
 
 @Component({
   selector: 'app-list',
@@ -29,5 +26,9 @@ export class ListComponent {
       title,
       price,
     };
+  }
+
+  addToCart(event: Product) {
+    console.log('add product', event);
   }
 }
