@@ -6,10 +6,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Product } from '../models/Product.model';
+import { ProductComponent } from './product/product.component';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [ProductComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

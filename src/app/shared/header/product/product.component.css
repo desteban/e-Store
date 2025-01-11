@@ -1,0 +1,16 @@
+.product-container {
+    min-height: 3rem;
+    @apply flex space-x-3;
+}
+
+.image-container {
+    @apply size-10;
+}
+
+.title-product {
+    @apply text-sm;
+}
+
+.price-product {
+    @apply text-xs;
+}

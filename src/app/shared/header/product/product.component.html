@@ -1,0 +1,10 @@
+<div class="product-container">
+  <picture class="image-container">
+    <img [src]="Product.imgSrc" [alt]="Product.title" loading="lazy" />
+  </picture>
+
+  <div class="data-container">
+    <p class="title-product">{{ Product.title }}</p>
+    <p class="price-product">$ {{ Product.price }}</p>
+  </div>
+</div>

@@ -17,8 +17,12 @@ img {
 }
 
 .card {
-  border: 1px lightgray solid;
+  @apply shadow-md transition-shadow duration-200;
   border-radius: 0.5rem;
+
+  &:hover {
+    @apply shadow-lg;
+  }
 
   &:hover img {
     opacity: 0.5;
@@ -36,12 +40,12 @@ img {
 
 button,
 .button {
-    margin-top: .5rem;
+  margin-top: .5rem;
   width: 100%;
   background-color: rgb(234, 234, 236);
   transition: transform ease-in-out .1s;
 
-  &:active{
+  &:active {
     transform: scale(.9);
   }
 }

@@ -78,12 +78,15 @@
     <div class="px-4 py-6 flex flex-col">
       <ul class="w-full">
         @for (product of cart; track $index) {
-        <li class="flex flex-col border-b-2 w-full">
+        <li>
+          <app-product [Product]="product" />
+        </li>
+        <!-- <li class="flex flex-col border-b-2 w-full">
           <p class="text-sm">{{ product.title }}</p>
           <p class="text-xs font-semibold">
             $ {{ product.price.toLocaleString() }}
           </p>
-        </li>
+        </li> -->
         }
       </ul>
       <p class="font-semibold border-t-2 mt-3">Total: {{ total() }}</p>
