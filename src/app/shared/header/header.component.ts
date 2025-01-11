@@ -1,4 +1,10 @@
-import { Component, computed, Input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  Input,
+  signal,
+  SimpleChanges,
+} from '@angular/core';
 import { Product } from '../models/Product.model';
 
 @Component({
@@ -10,8 +16,22 @@ import { Product } from '../models/Product.model';
 export class HeaderComponent {
   @Input({ required: true }) cart: Product[] = [];
   hideSideMenu = signal(true);
+  total = signal('');
+
+  ngOnChanges(changes: SimpleChanges) {
+    const cart = changes['cart'];
+    console.log(changes);
+
+    if (cart) {
+      this.total.set(this.calcTotal().toLocaleString());
+    }
+  }
 
   toggleSideMenu() {
     this.hideSideMenu.update((prev) => !prev);
+  }
+
+  calcTotal(): number {
+    return this.cart.reduce((total, product) => total + product.price, 0);
   }
 }
