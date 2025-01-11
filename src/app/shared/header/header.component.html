@@ -1,5 +1,5 @@
-<header>
-  <nav>
+<header class="bg-slate-50 z-10">
+  <nav class="container mx-auto" >
     <div class="flex flex-wrap items-center justify-between p-4">
       <div class="flex items-center space-x-8">
         <a href="https://flowbite.com/" class="flex items-center">
@@ -28,8 +28,8 @@
       </div>
       <div class="flex items-center">
         <button class="px-4 relative" (click)="toggleSideMenu()">
-          @if (cart.length !== 0) {
-          <span class="cart-item">{{ cart.length }}</span>
+          @if (sizeCart() !== 0) {
+          <span class="cart-item">{{ sizeCart() }}</span>
           }
 
           <svg
@@ -77,19 +77,17 @@
 
     <div class="px-4 py-6 flex flex-col">
       <ul class="w-full">
-        @for (product of cart; track $index) {
+        @for (product of cart(); track $index) {
         <li>
-          <app-product [Product]="product" />
+          <app-product
+            [Product]="product"
+            (removeProduct)="removeProduct($event)"
+            [index]="$index"
+          />
         </li>
-        <!-- <li class="flex flex-col border-b-2 w-full">
-          <p class="text-sm">{{ product.title }}</p>
-          <p class="text-xs font-semibold">
-            $ {{ product.price.toLocaleString() }}
-          </p>
-        </li> -->
         }
       </ul>
-      <p class="font-semibold border-t-2 mt-3">Total: {{ total() }}</p>
+      <p class="font-semibold border-t-2 mt-3">Total: {{ totalPrice() }}</p>
     </div>
   </div>
 </header>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '@app/shared/models/Product.model';
 
 @Component({
@@ -9,4 +9,11 @@ import { Product } from '@app/shared/models/Product.model';
 })
 export class ProductComponent {
   @Input({ required: true }) Product!: Product;
+  @Input({ required: true }) index!: number;
+
+  @Output() removeProduct = new EventEmitter<number>();
+
+  removeProductToCart() {
+    this.removeProduct.emit(this.index);
+  }
 }

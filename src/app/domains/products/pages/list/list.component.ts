@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { Product } from '@app/shared/models/Product.model';
 import { HeaderComponent } from '@app/shared/header/header.component';
+import { CartService } from '@app/shared/services/cart.service';
+import { ProductService } from '@app/shared/services/product.service';
 
 @Component({
   selector: 'app-list',
@@ -10,26 +12,19 @@ import { HeaderComponent } from '@app/shared/header/header.component';
   styleUrl: './list.component.css',
 })
 export class ListComponent {
-  cart = signal<Product[]>([]);
-  products = signal<Product[]>([
-    this.addProductInitial('Product 1', 100),
-    this.addProductInitial('Product 2', 200),
-    this.addProductInitial('Product 3', 300),
-    this.addProductInitial('Product 4', 500),
-    this.addProductInitial('Product 5', 220),
-    this.addProductInitial('Product 6', 300),
-  ]);
+  cartService = inject(CartService);
+  products = signal<Product[]>([]);
+  private productsServices = inject(ProductService);
 
-  addProductInitial(title: string, price: number): Product {
-    return {
-      id: Math.random().toString(),
-      imgSrc: 'https://picsum.photos/300/300?r=' + Math.random(),
-      title,
-      price,
-    };
+  ngOnInit() {
+    this.productsServices.getProducts().subscribe({
+      next: (products) => {
+        this.products.set(products);
+      },
+    });
   }
 
-  addToCart(productToCart: Product) {
-    this.cart.update((prev) => [...prev, productToCart]);
+  addProduct(product: Product) {
+    this.cartService.addToCart(product);
   }
 }

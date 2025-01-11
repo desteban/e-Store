@@ -1,12 +1,6 @@
-import {
-  Component,
-  computed,
-  Input,
-  signal,
-  SimpleChanges,
-} from '@angular/core';
-import { Product } from '../models/Product.model';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ProductComponent } from './product/product.component';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -15,24 +9,14 @@ import { ProductComponent } from './product/product.component';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  @Input({ required: true }) cart: Product[] = [];
+  private cartService = inject(CartService);
   hideSideMenu = signal(true);
-  total = signal('');
-
-  ngOnChanges(changes: SimpleChanges) {
-    const cart = changes['cart'];
-    console.log(changes);
-
-    if (cart) {
-      this.total.set(this.calcTotal().toLocaleString());
-    }
-  }
+  cart = this.cartService.cart;
+  totalPrice = this.cartService.totalPriceCart;
+  sizeCart = this.cartService.sizeCart;
+  removeProduct = this.cartService.deleteToCart;
 
   toggleSideMenu() {
     this.hideSideMenu.update((prev) => !prev);
-  }
-
-  calcTotal(): number {
-    return this.cart.reduce((total, product) => total + product.price, 0);
   }
 }
