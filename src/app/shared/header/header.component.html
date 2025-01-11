@@ -27,7 +27,11 @@
         </ul>
       </div>
       <div class="flex items-center">
-        <button class="px-4" (click)="toggleSideMenu()">
+        <button class="px-4 relative" (click)="toggleSideMenu()">
+          @if (cart.length !== 0) {
+          <span class="cart-item">{{ cart.length }}</span>
+          }
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -69,6 +73,19 @@
           />
         </svg>
       </button>
+    </div>
+
+    <div class="px-4 py-6 flex">
+      <ul class="w-full">
+        @for (product of cart; track $index) {
+        <li class="flex flex-col border-b-2 w-full">
+          <p class="text-sm">{{ product.title }}</p>
+          <p class="text-xs font-semibold">
+            $ {{ product.price.toLocaleString() }}
+          </p>
+        </li>
+        }
+      </ul>
     </div>
   </div>
 </header>

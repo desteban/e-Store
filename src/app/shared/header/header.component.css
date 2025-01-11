@@ -1,0 +1,15 @@
+.cart-item {
+  height: 1.25rem;
+  width: 1.25rem;
+  padding: 0.8rem;
+  border-radius: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  font-size: 0.9rem;
+  top: -8px;
+  left: -8px;
+}

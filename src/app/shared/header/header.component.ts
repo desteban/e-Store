@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, Input, signal } from '@angular/core';
+import { Product } from '../models/Product.model';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,7 @@ import { Component, signal } from '@angular/core';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  @Input({ required: true }) cart: Product[] = [];
   hideSideMenu = signal(true);
 
   toggleSideMenu() {

@@ -10,6 +10,7 @@ import { HeaderComponent } from '@app/shared/header/header.component';
   styleUrl: './list.component.css',
 })
 export class ListComponent {
+  cart = signal<Product[]>([]);
   products = signal<Product[]>([
     this.addProductInitial('Product 1', 100),
     this.addProductInitial('Product 2', 200),
@@ -28,7 +29,7 @@ export class ListComponent {
     };
   }
 
-  addToCart(event: Product) {
-    console.log('add product', event);
+  addToCart(productToCart: Product) {
+    this.cart.update((prev) => [...prev, productToCart]);
   }
 }

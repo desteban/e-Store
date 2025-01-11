@@ -4,7 +4,7 @@
   </picture>
   <div class="card-container">
     <h3 class="card-title">{{ product.title }}</h3>
-    <p class="card-price">$ {{ product.price }}</p>
+    <p class="card-price">$ {{ product.price.toLocaleString() }}</p>
     <button (click)="addToCartHandler()">Add to cart</button>
   </div>
 </div>
