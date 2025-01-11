@@ -1,8 +1,11 @@
-<main>
-  <h1>Products</h1>
-  <div class="grid grid-cols-3 gap-3 p-3">
-    @for (product of products(); track $index) {
-    <app-product [product]="product" (addToCart)="addToCart(product)" />
-    }
-  </div>
-</main>
+<div class="container mx-auto">
+  <app-header />
+  <main class="px-4">
+    <h1 class="text-xl font-bold">Products</h1>
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-3 p-3 mt-4">
+      @for (product of products(); track $index) {
+      <app-product [product]="product" (addToCart)="addToCart(product)" />
+      }
+    </div>
+  </main>
+</div>

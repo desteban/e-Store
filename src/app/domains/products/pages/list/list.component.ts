@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { Product } from '@app/shared/models/Product.model';
+import { HeaderComponent } from '@app/shared/header/header.component';
 
 @Component({
   selector: 'app-list',
-  imports: [ProductComponent],
+  imports: [ProductComponent, HeaderComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
@@ -20,7 +21,7 @@ export class ListComponent {
 
   addProductInitial(title: string, price: number): Product {
     return {
-      id: Math.random().toString() ,
+      id: Math.random().toString(),
       imgSrc: 'https://picsum.photos/300/300?r=' + Math.random(),
       title,
       price,
