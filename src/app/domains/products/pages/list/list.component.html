@@ -2,12 +2,7 @@
   <h1>Products</h1>
   <div class="grid grid-cols-3 gap-3 p-3">
     @for (product of products(); track $index) {
-    <app-product
-      [imgSrc]="product.imgSrc"
-      [title]="product.title"
-      [price]="product.price"
-      (addToCart)="addToCart(product)"
-    />
+    <app-product [product]="product" (addToCart)="addToCart(product)" />
     }
   </div>
 </main>
