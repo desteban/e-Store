@@ -1,8 +1,10 @@
-<div>
+<div class="card">
   <picture>
     <img [src]="imgSrc" alt="random image" loading="lazy" />
   </picture>
-  <h3>{{ title }}</h3>
-  <p>$ {{ price }}</p>
-  <button (click)="addToCartHandler()">Add to cart</button>
+  <div class="card-container" >
+    <h3 class="card-title">{{ title }}</h3>
+    <p class="card-price">$ {{ price }}</p>
+    <button (click)="addToCartHandler()">Add to cart</button>
+  </div>
 </div>

@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-export interface Product {
-  imgSrc: string;
-  title: string;
-  price: number;
-}
+import { Product } from '@app/shared/models/Product.model';
 
 @Component({
   selector: 'app-product',
