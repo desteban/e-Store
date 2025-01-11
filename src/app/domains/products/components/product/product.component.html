@@ -3,8 +3,10 @@
     <img [src]="product.images[0]" [alt]="product.title" loading="lazy" />
   </picture>
   <div class="card-container">
-    <h3 class="card-title">{{ product.title }}</h3>
-    <p class="card-price">$ {{ product.price.toLocaleString() }}</p>
+    <h3 class="card-title">{{ product.title | uppercase }}</h3>
+    <p class="card-price">
+      {{ product.price.toLocaleString() | currency : "$" : "symbol" : "1.0" }}
+    </p>
     <button (click)="addToCartHandler()">Add to cart</button>
   </div>
 </div>
