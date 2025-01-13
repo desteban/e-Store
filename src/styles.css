@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+    @apply text-3xl font-bold mb-3;
+}
+
+
+h2 {
+    @apply text-2xl font-bold mb-3;
+}
+
+
+h3 {
+    @apply text-xl font-bold mb-3;
+}
+
 button {
     margin: 0;
     padding: .25rem .5rem;
