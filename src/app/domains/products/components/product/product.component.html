@@ -1,7 +1,9 @@
 <div class="card">
-  <picture>
-    <img [src]="product.images[0]" [alt]="product.title" loading="lazy" />
-  </picture>
+  <a [routerLink]="['/product', product.id]">
+    <picture>
+      <img [src]="product.images[0]" [alt]="product.title" loading="lazy" />
+    </picture>
+  </a>
   <div class="card-container">
     <h3 class="card-title">{{ product.title | uppercase }}</h3>
     <p class="card-price">

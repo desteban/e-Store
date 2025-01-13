@@ -36,6 +36,7 @@ img {
 
 .card-title {
   font-size: 0.85rem;
+  @apply text-pretty leading-5;
 }
 
 button,
