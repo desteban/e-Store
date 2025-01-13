@@ -1,3 +1,10 @@
-svg{
+svg {
     width: 100%;
+}
+
+.btn {
+    padding: .5rem .75rem;
+    border-radius: .5rem;
+    background-color: rgb(20, 120, 220);
+    color: #fefefe
 }

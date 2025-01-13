@@ -1,11 +1,10 @@
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '@app/shared/models/Product.model';
-import { ReversePipe } from '@app/shared/pipes/reverse.pipe';
 
 @Component({
   selector: 'app-product',
-  imports: [UpperCasePipe, CurrencyPipe, ReversePipe],
+  imports: [UpperCasePipe, CurrencyPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',
 })
