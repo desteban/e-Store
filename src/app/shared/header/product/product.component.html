@@ -1,13 +1,17 @@
 <div class="product-container">
-  <picture class="image-container">
-    <img [src]="Product.images[0]" [alt]="Product.title" />
-  </picture>
+  <a class="link" [routerLink]="['/product/', Product.id]">
+    <picture class="image-container">
+      <img [src]="Product.images[0]" [alt]="Product.title" />
+    </picture>
+  </a>
 
-  <div class="data-container">
-    <p class="title-product">{{ Product.title }}</p>
-    <p class="price-product">$ {{ Product.price }}</p>
-  </div>
-  <div>
+  <a [routerLink]="['/product/', Product.id]" class="data-container">
+    <p class="title-product">{{ Product.title | maxLenghtText : 20 }}</p>
+    <p class="price-product">
+      {{ Product.price | currency : "$" : "symbol" : "1.0" }}
+    </p>
+  </a>
+  <div class="options">
     <button
       class="flex items-center justify-center h-full"
       (click)="removeProductToCart()"
