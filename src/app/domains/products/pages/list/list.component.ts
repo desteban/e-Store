@@ -13,7 +13,7 @@ import { RouterLinkWithHref } from '@angular/router';
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
-export class ListComponent {
+export default class ListComponent {
   cartService = inject(CartService);
   products = signal<Product[]>([]);
   categories = signal<Category[]>([]);

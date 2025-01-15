@@ -9,7 +9,7 @@ import { SearchSvgComponent } from '@app/assets/search-svg/search-svg.component'
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.css',
 })
-export class NotFoundComponent {
+export default class NotFoundComponent {
   constructor(private title: Title) {
     this.title.setTitle('Not found');
   }

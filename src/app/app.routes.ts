@@ -1,21 +1,38 @@
 import { Routes } from '@angular/router';
 
-import { ListComponent } from '@domains/products/pages/list/list.component';
-import { NotFoundComponent } from './domains/error/not-found/not-found.component';
 import { WithHeaderComponent } from './layouts/with-header/with-header.component';
-import { AboutComponent } from './domains/about/about.component';
-import { DetailComponent } from './domains/products/pages/detail/detail.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: WithHeaderComponent,
     children: [
-      { path: '', component: ListComponent, title: 'Store' },
-      { path: 'products', component: ListComponent, title: 'Store' },
-      { path: 'about', component: AboutComponent, title: 'About' },
-      { path: 'product/:id', component: DetailComponent },
+      {
+        path: '',
+        loadComponent: () =>
+          import('@domains/products/pages/list/list.component'),
+        title: 'Store',
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('@domains/products/pages/list/list.component'),
+        title: 'Store',
+      },
+      {
+        path: 'about',
+        loadComponent: () => import('@domains/about/about.component'),
+        title: 'About',
+      },
+      {
+        path: 'product/:id',
+        loadComponent: () =>
+          import('@domains/products/pages/detail/detail.component'),
+      },
     ],
   },
-  { path: '**', component: NotFoundComponent },
+  {
+    path: '**',
+    loadComponent: () => import('@domains/error/not-found/not-found.component'),
+  },
 ];
