@@ -6,10 +6,12 @@ import { ProductService } from '@app/shared/services/product.service';
 import { CategoryService } from '@app/domains/category/services/category.service';
 import { Category } from '@app/shared/models/Category';
 import { RouterLinkWithHref } from '@angular/router';
+import { SearchComponent } from '../../components/search/search.component';
+import { FilterCategoryComponent } from '../../components/filter-category/filter-category.component';
 
 @Component({
   selector: 'app-list',
-  imports: [ProductComponent, RouterLinkWithHref],
+  imports: [ProductComponent, SearchComponent, FilterCategoryComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
@@ -19,7 +21,8 @@ export default class ListComponent {
   categories = signal<Category[]>([]);
   private productsServices = inject(ProductService);
   private categoryService = inject(CategoryService);
-  @Input() category_id?: string;
+  @Input() categoryId?: string;
+  @Input() title?: string;
 
   ngOnInit() {
     this.getCategories();
@@ -35,7 +38,7 @@ export default class ListComponent {
 
   private getProducts() {
     this.productsServices
-      .getProductsByFilters({ categoryId: this.category_id })
+      .getProductsByFilters({ categoryId: this.categoryId, title: this.title })
       .subscribe({
         next: (products) => {
           this.products.set(products);

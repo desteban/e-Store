@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Product } from '../models/Product.model';
-
-interface getProductsProps {
-  categoryId?: string;
-}
+import getProductsProps from '../models/getProductsProps';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +14,14 @@ export class ProductService {
     return this.http.get<Product[]>(this.url);
   }
 
-  getProductsByFilters({ categoryId }: getProductsProps) {
+  getProductsByFilters({ categoryId, title }: getProductsProps) {
     const url = new URL(this.url);
     if (categoryId) {
       url.searchParams.set('categoryId', categoryId);
+    }
+
+    if (title) {
+      url.searchParams.set('title', title);
     }
 
     return this.http.get<Product[]>(url.toString());

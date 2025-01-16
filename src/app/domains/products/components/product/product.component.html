@@ -7,7 +7,7 @@
   <div class="card-container">
     <h3 class="card-title">{{ product.title | uppercase }}</h3>
     <p class="card-price">
-      {{ product.price.toLocaleString() | currency : "$" : "symbol" : "1.0" }}
+      {{ product.price.toLocaleString() | currency }}
     </p>
     <button (click)="addToCartHandler()">Add to cart</button>
   </div>
