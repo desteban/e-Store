@@ -10,6 +10,8 @@ export class FilterService {
   filters = computed<getProductsProps>(() => this.getFilters());
   minPrice = signal<number | undefined>(undefined);
   maxPrice = signal<number | undefined>(undefined);
+  limit = signal<number>(20);
+  offset = signal<number>(0);
 
   private getFilters(): getProductsProps {
     const filters: getProductsProps = {};
@@ -30,6 +32,9 @@ export class FilterService {
       filters.price_max = this.maxPrice();
     }
 
+    filters.limit = this.limit();
+    filters.offset = this.offset();
+
     return filters;
   }
 
@@ -41,10 +46,6 @@ export class FilterService {
 
   changeMaxPrice(price: number | undefined) {
     this.maxPrice.set(price);
-
-    if (this.minPrice() === undefined) {
-      this.minPrice.set(0);
-    }
   }
 
   changeMinPrice(price: number | undefined) {

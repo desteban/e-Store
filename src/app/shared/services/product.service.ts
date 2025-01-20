@@ -19,6 +19,8 @@ export class ProductService {
     title,
     price_max,
     price_min,
+    limit,
+    offset = 0,
   }: getProductsProps) {
     const url = new URL(this.url);
     if (categoryId) {
@@ -29,13 +31,21 @@ export class ProductService {
       url.searchParams.set('title', title);
     }
 
-    if (price_max) {
+    if (price_max && price_min) {
+      url.searchParams.set('price_min', price_min.toString());
       url.searchParams.set('price_max', price_max.toString());
     }
 
-    if (price_min) {
-      url.searchParams.set('price_min', price_min.toString());
+    if (price_max && !price_min) {
+      url.searchParams.set('price', price_max.toString());
     }
+
+    if (limit) {
+      url.searchParams.set('limit', limit.toString());
+    }
+
+    console.log('offset', offset);
+    url.searchParams.set('offset', offset.toString());
 
     return this.http.get<Product[]>(url.toString());
   }

@@ -38,9 +38,8 @@ export default class ListComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getProducts();
     this.syncFilters();
-
+    this.getProducts();
   }
 
   addProduct(product: Product) {
@@ -48,13 +47,10 @@ export default class ListComponent {
   }
 
   private getProducts() {
+    console.log('filtros a enviar', this.filtersService.filters());
+
     this.productsServices
-      .getProductsByFilters({
-        categoryId: this.categoryId,
-        title: this.title,
-        price_min: this.price_min,
-        price_max: this.price_max,
-      })
+      .getProductsByFilters(this.filtersService.filters())
       .subscribe({
         next: (products) => {
           this.products.set(products);
