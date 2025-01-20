@@ -8,8 +8,10 @@ export class FilterService {
   categoryId = signal<string>('');
   title = signal<string>('');
   filters = computed<getProductsProps>(() => this.getFilters());
+  minPrice = signal<number | undefined>(undefined);
+  maxPrice = signal<number | undefined>(undefined);
 
-  getFilters(): getProductsProps {
+  private getFilters(): getProductsProps {
     const filters: getProductsProps = {};
 
     if (this.title().length !== 0) {
@@ -20,6 +22,14 @@ export class FilterService {
       filters.categoryId = this.categoryId();
     }
 
+    if (this.minPrice() !== null) {
+      filters.price_min = this.minPrice();
+    }
+
+    if (this.maxPrice() !== null) {
+      filters.price_max = this.maxPrice();
+    }
+
     return filters;
   }
 
@@ -27,5 +37,24 @@ export class FilterService {
     event.preventDefault();
     const { value } = event.currentTarget as HTMLInputElement;
     this.title.set(value);
+  }
+
+  changeMaxPrice(price: number | undefined) {
+    this.maxPrice.set(price);
+
+    if (this.minPrice() === undefined) {
+      this.minPrice.set(0);
+    }
+  }
+
+  changeMinPrice(price: number | undefined) {
+    this.minPrice.set(price);
+  }
+
+  syncFilters(filters: getProductsProps) {
+    this.title.set(filters.title || '');
+    this.categoryId.set(filters.categoryId || '');
+    this.minPrice.set(filters.price_min || undefined);
+    this.maxPrice.set(filters.price_max || undefined);
   }
 }

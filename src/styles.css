@@ -37,3 +37,15 @@ button {
         background-color: rgba(0, 0, 0, .1);
     }
 }
+
+aside {
+    @apply h-min w-full px-6 py-4 md:w-1/3 rounded-lg sticky top-2 bg-background-light dark:bg-background-dark text-background-light dark:text-background-text-dark;
+
+    & .filter{
+        margin-bottom: 1.25rem
+    }
+
+    & h4 {
+        @apply font-semibold mb-3;
+    }
+}

@@ -5,13 +5,19 @@ import { CartService } from '@app/shared/services/cart.service';
 import { ProductService } from '@app/shared/services/product.service';
 import { CategoryService } from '@app/domains/category/services/category.service';
 import { Category } from '@app/shared/models/Category';
-import { RouterLinkWithHref } from '@angular/router';
 import { SearchComponent } from '../../components/search/search.component';
 import { FilterCategoryComponent } from '../../components/filter-category/filter-category.component';
+import { FilterPriceComponent } from '../../components/filter-price/filter-price.component';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-list',
-  imports: [ProductComponent, SearchComponent, FilterCategoryComponent],
+  imports: [
+    ProductComponent,
+    SearchComponent,
+    FilterCategoryComponent,
+    FilterPriceComponent,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
@@ -21,8 +27,11 @@ export default class ListComponent {
   categories = signal<Category[]>([]);
   private productsServices = inject(ProductService);
   private categoryService = inject(CategoryService);
+  private filtersService = inject(FilterService);
   @Input() categoryId?: string;
   @Input() title?: string;
+  @Input() price_min?: number;
+  @Input() price_max?: number;
 
   ngOnInit() {
     this.getCategories();
@@ -30,6 +39,8 @@ export default class ListComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     this.getProducts();
+    this.syncFilters();
+
   }
 
   addProduct(product: Product) {
@@ -38,7 +49,12 @@ export default class ListComponent {
 
   private getProducts() {
     this.productsServices
-      .getProductsByFilters({ categoryId: this.categoryId, title: this.title })
+      .getProductsByFilters({
+        categoryId: this.categoryId,
+        title: this.title,
+        price_min: this.price_min,
+        price_max: this.price_max,
+      })
       .subscribe({
         next: (products) => {
           this.products.set(products);
@@ -54,6 +70,15 @@ export default class ListComponent {
       error: (err) => {
         console.error(err);
       },
+    });
+  }
+
+  private syncFilters() {
+    this.filtersService.syncFilters({
+      categoryId: this.categoryId,
+      title: this.title,
+      price_min: this.price_min,
+      price_max: this.price_max,
     });
   }
 }

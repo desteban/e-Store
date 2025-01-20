@@ -13,17 +13,15 @@ import { JsonPipe } from '@angular/common';
 export class SearchComponent {
   private filtersProducts = inject(FilterService);
   title = this.filtersProducts.title;
-  changeTitle = this.filtersProducts.changeTitle
-  filters = this.filtersProducts.getFilters;
+  changeTitle = this.filtersProducts.changeTitle;
+  filters = this.filtersProducts.filters;
 
   constructor(private router: Router) {}
 
   search(event: Event) {
     event.preventDefault();
-    console.log('buscando...', this.filtersProducts.getFilters());
-
     this.router.navigate(['/'], {
-      queryParams: this.filtersProducts.getFilters(),
+      queryParams: this.filters(),
     });
   }
 }
