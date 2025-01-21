@@ -1,4 +1,4 @@
-import { Component, inject, input, Input, signal, SimpleChanges } from '@angular/core';
+import { Component, Directive, inject, input, Input, signal, SimpleChanges } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { Product } from '@app/shared/models/Product.model';
 import { CartService } from '@app/shared/services/cart.service';
@@ -10,7 +10,6 @@ import { FilterCategoryComponent } from '../../components/filter-category/filter
 import { FilterPriceComponent } from '../../components/filter-price/filter-price.component';
 import { FilterService } from '../../services/filter.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +19,6 @@ import { JsonPipe } from '@angular/common';
     FilterCategoryComponent,
     FilterPriceComponent,
     PaginationComponent,
-    JsonPipe,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',

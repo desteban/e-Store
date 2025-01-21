@@ -1,5 +1,5 @@
 .main {
-    @apply container mx-auto md:flex relative mt-10;
+    @apply container mx-auto md:flex relative mt-10 pt-5;
 }
 
 .products {

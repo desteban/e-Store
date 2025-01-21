@@ -2,11 +2,10 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { Category } from '@app/shared/models/Category';
 import { FilterService } from '../../services/filter.service';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'products-filter-category',
-  imports: [RouterLinkWithHref, JsonPipe],
+  imports: [RouterLinkWithHref],
   templateUrl: './filter-category.component.html',
   styleUrl: './filter-category.component.css',
 })
