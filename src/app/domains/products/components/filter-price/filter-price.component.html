@@ -7,13 +7,14 @@
       placeholder="Min"
       [value]="minPrice()"
       (input)="changeMinPrice($event)"
+      pattern="^[0-9]"
     />
     <input
       type="number"
       placeholder="Max"
       [value]="maxPrice()"
       (input)="changeMaxPrice($event)"
-      pattern="[0-9]*"
+      pattern="^[0-9]"
     />
     <button aria-label="filter-by-price" (click)="filterByPrice()">
       <svg

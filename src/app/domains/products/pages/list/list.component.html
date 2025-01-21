@@ -5,6 +5,8 @@
 
   <div class="main">
     <section aria-label="products" class="products">
+      <products-pagination [currentPage]="page" />
+
       <h1 class="text-xl font-bold">Products</h1>
       <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 p-3 mt-4">
         @for (product of products(); track $index) {

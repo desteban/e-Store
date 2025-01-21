@@ -57,5 +57,6 @@ export class FilterService {
     this.categoryId.set(filters.categoryId || '');
     this.minPrice.set(filters.price_min || undefined);
     this.maxPrice.set(filters.price_max || undefined);
+    this.offset.set(filters.offset || 0);
   }
 }

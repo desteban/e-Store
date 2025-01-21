@@ -44,7 +44,6 @@ export class ProductService {
       url.searchParams.set('limit', limit.toString());
     }
 
-    console.log('offset', offset);
     url.searchParams.set('offset', offset.toString());
 
     return this.http.get<Product[]>(url.toString());

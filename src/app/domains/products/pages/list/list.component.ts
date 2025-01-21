@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
+import { Component, inject, input, Input, signal, SimpleChanges } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { Product } from '@app/shared/models/Product.model';
 import { CartService } from '@app/shared/services/cart.service';
@@ -9,6 +9,8 @@ import { SearchComponent } from '../../components/search/search.component';
 import { FilterCategoryComponent } from '../../components/filter-category/filter-category.component';
 import { FilterPriceComponent } from '../../components/filter-price/filter-price.component';
 import { FilterService } from '../../services/filter.service';
+import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-list',
@@ -17,6 +19,8 @@ import { FilterService } from '../../services/filter.service';
     SearchComponent,
     FilterCategoryComponent,
     FilterPriceComponent,
+    PaginationComponent,
+    JsonPipe,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -32,6 +36,8 @@ export default class ListComponent {
   @Input() title?: string;
   @Input() price_min?: number;
   @Input() price_max?: number;
+  @Input({ required: true, transform: (value: string) => parseInt(value) || 1 })
+  page!: number;
 
   ngOnInit() {
     this.getCategories();
@@ -47,8 +53,6 @@ export default class ListComponent {
   }
 
   private getProducts() {
-    console.log('filtros a enviar', this.filtersService.filters());
-
     this.productsServices
       .getProductsByFilters(this.filtersService.filters())
       .subscribe({
@@ -75,6 +79,7 @@ export default class ListComponent {
       title: this.title,
       price_min: this.price_min,
       price_max: this.price_max,
+      offset: (this.page - 1) * this.filtersService.limit(),
     });
   }
 }
