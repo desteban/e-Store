@@ -3,6 +3,8 @@
     <product-search />
   </div>
 
+  <products-active-filters />
+
   <div class="main" id="main">
     <section aria-label="products" class="products">
       <products-pagination [currentPage]="page" />
@@ -17,7 +19,6 @@
         <products-pagination [currentPage]="page" />
       </div>
     </section>
-
 
     <aside aria-label="filters">
       <products-filter-category [categories]="categories()" />

@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Product } from '../models/Product.model';
-import getProductsProps from '../models/getProductsProps';
+import { Product } from '../../../shared/models/Product.model';
+import FiltersProducts from '../models/FiltersProducts';
+import { Pagination } from '@app/shared/models/Pagination';
+
+interface getProductsProps extends FiltersProducts, Pagination {}
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +13,7 @@ export class ProductService {
   private http = inject(HttpClient);
   private url: string = 'https://api.escuelajs.co/api/v1/products';
 
-  getProducts(props: getProductsProps) {
+  getProducts(props: FiltersProducts) {
     return this.http.get<Product[]>(this.url);
   }
 

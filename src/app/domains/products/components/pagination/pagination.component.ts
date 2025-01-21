@@ -8,10 +8,6 @@ import { RouterLinkWithHref } from '@angular/router';
   styleUrl: './pagination.component.css',
 })
 export class PaginationComponent {
-  // @Input({ required: true }) currentPage: number = 1;
-  // nextPage: number = this.currentPage + 1;
-  // prevPage: number = this.currentPage - 1;
-
   private hash: string = 'main';
   currentPage = input<number>(1);
   nextPage = computed<number>(() => this.currentPage() + 1);
@@ -25,12 +21,6 @@ export class PaginationComponent {
   });
 
   onClick() {
-    // const target = document.getElementById(
-    //   this.el.nativeElement.getAttribute('main')
-    // );
-    // if (target) {
-    //   target.scrollIntoView({ behavior: 'smooth' }); // Desplazamiento suave
-    // }
     const el = document.getElementById(this.hash);
     if (el) {
       el.scrollIntoView({ behavior: 'instant' });

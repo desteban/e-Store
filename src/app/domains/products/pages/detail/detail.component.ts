@@ -2,7 +2,7 @@ import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { Component, computed, inject, Input, signal } from '@angular/core';
 import { Product } from '@app/shared/models/Product.model';
 import { CartService } from '@app/shared/services/cart.service';
-import { ProductService } from '@app/shared/services/product.service';
+import { ProductService } from '@app/domains/products/services/product.service';
 
 @Component({
   selector: 'app-detail',

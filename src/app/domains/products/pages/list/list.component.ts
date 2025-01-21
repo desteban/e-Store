@@ -1,8 +1,16 @@
-import { Component, Directive, inject, input, Input, signal, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Directive,
+  inject,
+  input,
+  Input,
+  signal,
+  SimpleChanges,
+} from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { Product } from '@app/shared/models/Product.model';
 import { CartService } from '@app/shared/services/cart.service';
-import { ProductService } from '@app/shared/services/product.service';
+import { ProductService } from '@app/domains/products/services/product.service';
 import { CategoryService } from '@app/domains/category/services/category.service';
 import { Category } from '@app/shared/models/Category';
 import { SearchComponent } from '../../components/search/search.component';
@@ -10,6 +18,8 @@ import { FilterCategoryComponent } from '../../components/filter-category/filter
 import { FilterPriceComponent } from '../../components/filter-price/filter-price.component';
 import { FilterService } from '../../services/filter.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { ActiveFiltersComponent } from '../../components/active-filters/active-filters.component';
+import { PaginationService } from '@app/shared/services/pagination.service';
 
 @Component({
   selector: 'app-list',
@@ -19,6 +29,7 @@ import { PaginationComponent } from '../../components/pagination/pagination.comp
     FilterCategoryComponent,
     FilterPriceComponent,
     PaginationComponent,
+    ActiveFiltersComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -30,6 +41,7 @@ export default class ListComponent {
   private productsServices = inject(ProductService);
   private categoryService = inject(CategoryService);
   private filtersService = inject(FilterService);
+  private paginationService = inject(PaginationService);
   @Input() categoryId?: string;
   @Input() title?: string;
   @Input() price_min?: number;
@@ -43,6 +55,7 @@ export default class ListComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     this.syncFilters();
+    this.syncPagination();
     this.getProducts();
   }
 
@@ -52,7 +65,7 @@ export default class ListComponent {
 
   private getProducts() {
     this.productsServices
-      .getProductsByFilters(this.filtersService.filters())
+      .getProductsByFilters({ ...this.filtersService.filters(), ...this.paginationService.pagination() })
       .subscribe({
         next: (products) => {
           this.products.set(products);
@@ -77,7 +90,13 @@ export default class ListComponent {
       title: this.title,
       price_min: this.price_min,
       price_max: this.price_max,
-      offset: (this.page - 1) * this.filtersService.limit(),
+    });
+  }
+
+  private syncPagination() {
+    this.paginationService.syncPagination({
+      limit: this.paginationService.limit(),
+      offset: (this.page - 1) * this.paginationService.limit(),
     });
   }
 }

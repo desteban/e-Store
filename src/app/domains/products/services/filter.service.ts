@@ -1,5 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
-import getProductsProps from '@app/shared/models/getProductsProps';
+import FiltersProducts from '@app/domains/products/models/FiltersProducts';
+
+type FilterKeys = keyof FiltersProducts;
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +9,13 @@ import getProductsProps from '@app/shared/models/getProductsProps';
 export class FilterService {
   categoryId = signal<string>('');
   title = signal<string>('');
-  filters = computed<getProductsProps>(() => this.getFilters());
+  filters = computed<FiltersProducts>(() => this.getFilters());
+  activeFilters = computed<FilterKeys[]>(() => this.getActiveFilters());
   minPrice = signal<number | undefined>(undefined);
   maxPrice = signal<number | undefined>(undefined);
-  limit = signal<number>(20);
-  offset = signal<number>(0);
 
-  private getFilters(): getProductsProps {
-    const filters: getProductsProps = {};
+  private getFilters(): FiltersProducts {
+    const filters: FiltersProducts = {};
 
     if (this.title().length !== 0) {
       filters.title = this.title();
@@ -32,10 +33,13 @@ export class FilterService {
       filters.price_max = this.maxPrice();
     }
 
-    filters.limit = this.limit();
-    filters.offset = this.offset();
-
     return filters;
+  }
+
+  private getActiveFilters(): FilterKeys[] {
+    return Object.keys(this.filters()).filter(
+      (key) => this.filters()[key as FilterKeys] !== undefined
+    ) as FilterKeys[];
   }
 
   changeTitle(event: Event) {
@@ -52,11 +56,10 @@ export class FilterService {
     this.minPrice.set(price);
   }
 
-  syncFilters(filters: getProductsProps) {
+  syncFilters(filters: FiltersProducts) {
     this.title.set(filters.title || '');
     this.categoryId.set(filters.categoryId || '');
     this.minPrice.set(filters.price_min || undefined);
     this.maxPrice.set(filters.price_max || undefined);
-    this.offset.set(filters.offset || 0);
   }
 }

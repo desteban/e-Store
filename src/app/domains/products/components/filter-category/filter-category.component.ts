@@ -20,7 +20,7 @@ export class FilterCategoryComponent {
     this.route.set(this.router.url);
   }
 
-  selectCategory(categoryId: string | number) {
-    this.categoryId.set(categoryId as string);
+  selectCategory(categoryId: number) {
+    this.categoryId.set(categoryId.toString());
   }
 }
