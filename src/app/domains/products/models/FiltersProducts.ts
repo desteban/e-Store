@@ -3,5 +3,5 @@ export default interface FiltersProducts {
   title?: string;
   price_min?: number;
   price_max?: number;
-  price?: number;
+  // price?: number;
 }

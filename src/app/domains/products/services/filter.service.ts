@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import FiltersProducts from '@app/domains/products/models/FiltersProducts';
 
-type FilterKeys = keyof FiltersProducts;
+export type FilterKeys = keyof FiltersProducts;
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +61,22 @@ export class FilterService {
     this.categoryId.set(filters.categoryId || '');
     this.minPrice.set(filters.price_min || undefined);
     this.maxPrice.set(filters.price_max || undefined);
+  }
+
+  removeFilter(filter: FilterKeys) {
+    switch (filter) {
+      case 'title':
+        this.title.set('');
+        break;
+      case 'categoryId':
+        this.categoryId.set('');
+        break;
+      case 'price_min':
+        this.minPrice.set(undefined);
+        break;
+      case 'price_max':
+        this.maxPrice.set(undefined);
+        break;
+    }
   }
 }
