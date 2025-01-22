@@ -8,6 +8,10 @@ export class ScrollToService {
     this.scrollToBehavior(querySelector);
   }
 
+  scrollToMain(){
+    this.scrollToBehavior('main');
+  }
+
   scrollToBehavior(
     querySelector: string,
     behavior: ScrollBehavior = 'instant'

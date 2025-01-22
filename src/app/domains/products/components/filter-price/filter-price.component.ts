@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { Router } from '@angular/router';
+import { ScrollToService } from '@app/shared/services/scroll-to.service';
 
 @Component({
   selector: 'products-filter-price',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FilterPriceComponent {
   private productsFilterService = inject(FilterService);
+  private scrollService = inject(ScrollToService);
   maxPrice = this.productsFilterService.maxPrice;
   minPrice = this.productsFilterService.minPrice;
   setMaxPrice = this.productsFilterService.changeMaxPrice;
@@ -18,11 +20,13 @@ export class FilterPriceComponent {
 
   constructor(private router: Router) {}
 
-  filterByPrice() {
+  filterByPrice(event: Event) {
+    event.preventDefault();
     this.router.navigate([''], {
       queryParamsHandling: 'merge',
       queryParams: this.productsFilterService.filters(),
     });
+    this.scrollService.scrollToMain();
   }
 
   changeMaxPrice(event: Event) {

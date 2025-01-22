@@ -1,13 +1,14 @@
 <div>
   <h4>Filter by price</h4>
 
-  <div class="filters">
+  <form class="filters">
     <input
       type="number"
       placeholder="Min"
       [value]="minPrice()"
       (input)="changeMinPrice($event)"
       pattern="^[0-9]"
+      required
     />
     <input
       type="number"
@@ -15,8 +16,9 @@
       [value]="maxPrice()"
       (input)="changeMaxPrice($event)"
       pattern="^[0-9]"
+      required
     />
-    <button aria-label="filter-by-price" (click)="filterByPrice()">
+    <button aria-label="filter-by-price" (click)="filterByPrice($event)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -31,5 +33,5 @@
         />
       </svg>
     </button>
-  </div>
+  </form>
 </div>

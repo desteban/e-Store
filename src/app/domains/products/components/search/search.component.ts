@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLinkWithHref } from '@angular/router';
+import { Router } from '@angular/router';
 import { FilterService } from '../../services/filter.service';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'product-search',
