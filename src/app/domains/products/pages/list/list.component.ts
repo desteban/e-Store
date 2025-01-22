@@ -1,12 +1,4 @@
-import {
-  Component,
-  Directive,
-  inject,
-  input,
-  Input,
-  signal,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { Product } from '@app/shared/models/Product.model';
 import { CartService } from '@app/shared/services/cart.service';
@@ -65,7 +57,10 @@ export default class ListComponent {
 
   private getProducts() {
     this.productsServices
-      .getProductsByFilters({ ...this.filtersService.filters(), ...this.paginationService.pagination() })
+      .getProductsByFilters({
+        ...this.filtersService.filters(),
+        ...this.paginationService.pagination(),
+      })
       .subscribe({
         next: (products) => {
           this.products.set(products);

@@ -2,6 +2,7 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { Category } from '@app/shared/models/Category';
 import { FilterService } from '../../services/filter.service';
+import { ScrollToService } from '@app/shared/services/scroll-to.service';
 
 @Component({
   selector: 'products-filter-category',
@@ -12,6 +13,7 @@ import { FilterService } from '../../services/filter.service';
 export class FilterCategoryComponent {
   @Input({ required: true }) categories!: Category[];
   private filterProducts = inject(FilterService);
+  private scrollService = inject(ScrollToService);
   filters = this.filterProducts.filters;
   categoryId = this.filterProducts.categoryId;
   route = signal('');
@@ -21,6 +23,10 @@ export class FilterCategoryComponent {
   }
 
   selectCategory(categoryId: number) {
-    this.categoryId.set(categoryId.toString());
+    if (categoryId !== 0) {
+      this.categoryId.set(categoryId.toString());
+    }
+
+    this.scrollService.scrollTo('#main');
   }
 }

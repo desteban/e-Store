@@ -1,11 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { FilterKeys, FilterService } from '../../services/filter.service';
-import { JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'products-active-filters',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './active-filters.component.html',
   styleUrl: './active-filters.component.css',
 })
