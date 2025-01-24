@@ -10,7 +10,7 @@
       <products-pagination [currentPage]="page" />
 
       <h1 class="text-xl font-bold">Products</h1>
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 p-3 mt-4">
+      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 p-3 mt-4 auto-rows-min">
         @for (product of products(); track $index) {
         <app-product [product]="product" (addToCart)="addProduct($event)" />
         }

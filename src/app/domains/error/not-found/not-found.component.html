@@ -1,16 +1,17 @@
-<main
-  class="container mx-auto flex items-center justify-center max-h-svh px-8 py-4"
->
+<main class="flex items-center justify-center min-h-svh px-4 overflow-hidden dark:bg-background-dark dark:text-background-light">
   <div>
-    <div class="flex items-center justify-center">
-      <app-search-svg />
-    </div>
+    <!-- <div class="flex items-center justify-center bg-red-500"> -->
+      <app-search-svg class="flex items-center justify-center" />
+       <!-- <img src="/images/search.svg" alt="" class="max-w-min w-1/2" /> -->
+    <!-- </div> -->
 
     <div class="mt-7 space-y-3">
       <h1 class="text-8xl font-bold text-center">404</h1>
-      <p class="text-center text-xl" >Oops, looks like we don't have what you're looking for.</p>
-      <div class="flex items-center justify-center" >
-        <a routerLink="/" class="btn" >Back to Home</a>
+      <p class="text-center text-xl">
+        Oops, looks like we don't have what you're looking for.
+      </p>
+      <div class="flex items-center justify-center">
+        <a routerLink="/" class="btn">Back to Home</a>
       </div>
     </div>
   </div>
