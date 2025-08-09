@@ -50,6 +50,7 @@ button,
   width: 100%;
   background-color: rgb(234, 234, 236);
   transition: transform ease-in-out .1s;
+  font-weight: 600;
 
   &:active {
     transform: scale(.9);
