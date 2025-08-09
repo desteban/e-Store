@@ -1,0 +1,32 @@
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+picture,
+figure {
+  max-height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 3/2;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .reverse-section {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 32px;
+    align-items: center;
+  }
+}

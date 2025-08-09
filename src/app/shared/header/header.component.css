@@ -13,3 +13,11 @@
   top: -8px;
   left: -8px;
 }
+
+ul {
+  list-style: none;
+}
+
+li {
+  margin: 0;
+}
