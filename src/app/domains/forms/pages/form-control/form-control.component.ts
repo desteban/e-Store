@@ -6,10 +6,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { FormBuilderComponent } from '../../components/form-builder/form-builder.component';
 
 @Component({
   selector: 'app-forms-control',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, FormBuilderComponent],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.css',
 })
@@ -27,7 +28,7 @@ export default class FormControlComponent implements OnInit {
   newsLetterForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    agree: new FormControl(false),
+    agree: new FormControl(false, Validators.requiredTrue),
   });
 
   submit() {
@@ -54,8 +55,8 @@ export default class FormControlComponent implements OnInit {
   }
 
   submitNewsLetter() {
+    this.newsLetterForm.markAllAsTouched();
     if (this.newsLetterForm.invalid) {
-      console.error('Tenemos errores');
       return;
     }
 

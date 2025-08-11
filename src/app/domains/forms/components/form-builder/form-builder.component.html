@@ -1,0 +1,30 @@
+<section>
+  <h2>Formulario dentro de formulario</h2>
+  <form [formGroup]="contactForm" (submit)="send()">
+    <div formGroupName="fullName">
+      <label>
+        Nombre:
+        <input type="text" formControlName="name" placeholder="Tu Nombre" />
+      </label>
+
+      <label>
+        Apellido:
+        <input
+          type="text"
+          formControlName="surname"
+          placeholder="Tu Apellido"
+        />
+      </label>
+    </div>
+
+    <label>
+      Teléfono:
+      <input type="tel" formControlName="phone" placeholder="Tu Teléfono" />
+    </label>
+    @if (phoneForm?.invalid && phoneForm?.touched) {
+    <p class="text-red-400 m-0">Debe ingresar un número de teléfono valido</p>
+    }
+
+    <button type="submit">Enviar</button>
+  </form>
+</section>

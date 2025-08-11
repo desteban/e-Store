@@ -97,11 +97,11 @@
             placeholder="mail@example.com"
             formControlName="email"
             [class.invalid]="
-              emailNewsLetter?.touched && !emailNewsLetter?.valid
+              emailNewsLetter?.touched && this.emailNewsLetter?.invalid
             "
           />
         </label>
-        @if (emailNewsLetter?.touched && !emailNewsLetter?.hasError('email')) {
+        @if (emailNewsLetter?.touched && emailNewsLetter?.hasError('email')) {
         <p class="text-red-400">Debe ingresar un correo electrónico valido.</p>
         }
       </div>
@@ -117,4 +117,5 @@
       <button type="submit">Suscribirme</button>
     </form>
   </section>
+  <app-form-builder />
 </main>
