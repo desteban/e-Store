@@ -81,3 +81,9 @@ aside {
     @apply font-semibold mb-3;
   }
 }
+
+label.required::after,
+.required {
+  content: " *";
+  color: red;
+}

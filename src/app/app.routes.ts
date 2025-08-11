@@ -29,6 +29,20 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@domains/products/pages/detail/detail.component'),
       },
+      {
+        path: 'forms/template',
+        loadComponent: () =>
+          import('@domains/forms/pages/form-control/form-control.component'),
+        title: 'Form Control',
+      },
+      {
+        path: 'forms/reactive',
+        loadComponent: () =>
+          import(
+            '@domains/forms/pages/reactive-forms/reactive-forms.component'
+          ),
+        title: 'Reactive Forms',
+      },
     ],
   },
   {
