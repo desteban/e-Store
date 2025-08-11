@@ -33,6 +33,34 @@
 
           <span>{{ categoryField.value }}</span>
         </label>
+
+        <div>
+          <p>¿Está vivo?</p>
+          <label>
+            Si
+            <input
+              type="radio"
+              [formControl]="isAliveField"
+              name="isAlive"
+              value="si"
+            />
+          </label>
+
+          <label>
+            No
+            <input
+              type="radio"
+              [formControl]="isAliveField"
+              name="isAlive"
+              value="no"
+            />
+          </label>
+        </div>
+
+        <label>
+          <input type="checkbox" [formControl]="agreeField" />
+          Acepto los términos y condiciones
+        </label>
       </div>
     </form>
   </section>

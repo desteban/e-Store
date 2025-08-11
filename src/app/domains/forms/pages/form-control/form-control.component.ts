@@ -19,7 +19,9 @@ export default class FormControlComponent implements OnInit {
     Validators.minLength(3),
   ]);
 
-  categoryField = new FormControl('')
+  categoryField = new FormControl('');
+  agreeField = new FormControl(false);
+  isAliveField = new FormControl('');
 
   submit() {
     this.nameField.value?.trim();
