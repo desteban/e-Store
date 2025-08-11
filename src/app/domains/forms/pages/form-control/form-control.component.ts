@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -23,6 +24,12 @@ export default class FormControlComponent implements OnInit {
   agreeField = new FormControl(false);
   isAliveField = new FormControl('');
 
+  newsLetterForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    agree: new FormControl(false),
+  });
+
   submit() {
     this.nameField.value?.trim();
     if (this.nameField.invalid) {
@@ -32,6 +39,27 @@ export default class FormControlComponent implements OnInit {
     }
 
     console.log('Form is valid');
+  }
+
+  get nameNewsLetter() {
+    return this.newsLetterForm.get('name');
+  }
+
+  get emailNewsLetter() {
+    return this.newsLetterForm.get('email');
+  }
+
+  get agreeNewsLetter() {
+    return this.newsLetterForm.get('agree');
+  }
+
+  submitNewsLetter() {
+    if (this.newsLetterForm.invalid) {
+      console.error('Tenemos errores');
+      return;
+    }
+
+    console.log('data', this.newsLetterForm.value);
   }
 
   ngOnInit(): void {

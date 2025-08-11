@@ -1,0 +1,9 @@
+.invalid {
+  border: 1px solid red;
+  accent-color: red;
+  caret-color: red;
+}
+
+.invalid:focus {
+  outline-color: red;
+}

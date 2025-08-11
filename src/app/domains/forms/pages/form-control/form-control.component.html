@@ -4,6 +4,7 @@
   </div>
 
   <section class="container mx-auto px-6 py-4">
+    <h2>Form Filed</h2>
     <form (submit)="submit()">
       <div class="relative">
         <label>
@@ -13,11 +14,16 @@
             placeholder="Nombre"
             [formControl]="nameField"
             required="on"
+            [class.invalid]="nameField.touched && !nameField.valid"
           />
 
           <button type="submit">Enviar</button>
         </label>
-        <span>{{ nameFieldsErrors }}</span>
+        @if (nameField.hasError('required') && nameField.touched) {
+        <p class="text-red-400">El campo es requerido</p>
+        } @if (nameField.touched && nameField.hasError('minlength')) {
+        <p class="text-red-400">Debe ingresar al menos 3 caracteres</p>
+        }
       </div>
 
       <div class="relative">
@@ -62,6 +68,53 @@
           Acepto los términos y condiciones
         </label>
       </div>
+    </form>
+  </section>
+
+  <section>
+    <h2>Form Group</h2>
+
+    <form
+      (submit)="submitNewsLetter()"
+      class="flex flex-col space-y-4"
+      [formGroup]="newsLetterForm"
+    >
+      <label>
+        Nombre
+        <input
+          type="text"
+          placeholder="Tu nombre"
+          formControlName="name"
+          [class.invalid]="nameNewsLetter?.touched && !nameNewsLetter?.valid"
+        />
+      </label>
+
+      <div>
+        <label>
+          Correo
+          <input
+            type="email"
+            placeholder="mail@example.com"
+            formControlName="email"
+            [class.invalid]="
+              emailNewsLetter?.touched && !emailNewsLetter?.valid
+            "
+          />
+        </label>
+        @if (emailNewsLetter?.touched && !emailNewsLetter?.hasError('email')) {
+        <p class="text-red-400">Debe ingresar un correo electrónico valido.</p>
+        }
+      </div>
+
+      <label>
+        <input type="checkbox" formControlName="agree" />
+        Acepto los términos y condiciones
+      </label>
+      @if (agreeNewsLetter?.touched && !agreeNewsLetter?.valid) {
+      <p class="text-red-400">Debe Aceptar los términos y condiciones</p>
+      }
+
+      <button type="submit">Suscribirme</button>
     </form>
   </section>
 </main>
