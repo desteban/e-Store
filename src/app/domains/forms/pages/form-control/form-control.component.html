@@ -19,6 +19,21 @@
         </label>
         <span>{{ nameFieldsErrors }}</span>
       </div>
+
+      <div class="relative">
+        <label
+          >Categoría
+          <select [formControl]="categoryField">
+            <option value="" disabled selected>--Seleccione--</option>
+            <option value="1">Opción 1</option>
+            <option value="2">Opción 2</option>
+            <option value="3">Opción 3</option>
+            <option value="4">Opción 4</option>
+          </select>
+
+          <span>{{ categoryField.value }}</span>
+        </label>
+      </div>
     </form>
   </section>
 </main>
