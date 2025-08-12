@@ -1,0 +1,41 @@
+<div class="my-8">
+  <h2>Formulario de registro</h2>
+  <form (submit)="submit()" [formGroup]="registre" class="flex gap-4 flex-col">
+    <label>
+      Correo
+      <input type="email" placeholder="mail@text.com" formControlName="email" />
+    </label>
+    @if (email?.invalid && email?.touched) {
+    <p class="text-red-400">Debe ingresar un correo valido</p>
+    }
+
+    <div formGroupName="password">
+      <label>
+        Contraseña:
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          name="password"
+        />
+      </label>
+      @if (password?.hasError('invalid_password') && password?.touched) {
+      <p class="text-red-400">La contraseña debe contar con mínimo un número</p>
+      }
+
+      <label>
+        Confirmar contraseña:
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          id="confirmPassword"
+          name="confirmPassword"
+        />
+      </label>
+      @if (passwordGroup?.hasError('not_match')) {
+      <p class="text-red-400">La contraseña deben coincidir</p>
+      }
+    </div>
+    <button type="submit">Registrar</button>
+  </form>
+</div>

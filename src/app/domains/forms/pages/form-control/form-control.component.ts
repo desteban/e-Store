@@ -7,10 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormBuilderComponent } from '../../components/form-builder/form-builder.component';
+import { ValidationsComponent } from "../../components/validations/validations.component";
 
 @Component({
   selector: 'app-forms-control',
-  imports: [FormsModule, ReactiveFormsModule, FormBuilderComponent],
+  imports: [FormsModule, ReactiveFormsModule, FormBuilderComponent, ValidationsComponent],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.css',
 })
