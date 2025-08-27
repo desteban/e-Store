@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { FormBuilderComponent } from '../../components/form-builder/form-builder.component';
 import { ValidationsComponent } from '../../components/validations/validations.component';
-import { ConditionalComponent } from '../../components/conditional/conditional.component';
+import { ConditionalSmartComponent } from '../../containers/Conditional-Smart/Conditional-Smart.component';
 
 @Component({
   selector: 'app-forms-control',
@@ -17,7 +17,7 @@ import { ConditionalComponent } from '../../components/conditional/conditional.c
     ReactiveFormsModule,
     FormBuilderComponent,
     ValidationsComponent,
-    ConditionalComponent,
+    ConditionalSmartComponent,
   ],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.css',

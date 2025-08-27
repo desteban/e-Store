@@ -99,3 +99,8 @@ input {
   display: flex;
   flex-direction: column;
 }
+
+input:disabled {
+  background-color: rgba(172, 171, 171, 0.571);
+  cursor: not-allowed;
+}

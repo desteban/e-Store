@@ -5,7 +5,11 @@
     <div formGroupName="fullName">
       <label class="input"
         >Nombre:
-        <input type="text" placeholder="Tu nombre" formControlName="name"
+        <input
+          type="text"
+          placeholder="Tu nombre"
+          formControlName="name"
+          name="name"
       /></label>
 
       @if (nameField?.hasError('required') && nameField?.touched) {
@@ -16,9 +20,28 @@
 
       <label class="input"
         >Apellido
-        <input type="text" placeholder="Tu apellido" formControlName="surname"
+        <input
+          type="text"
+          placeholder="Tu apellido"
+          formControlName="surname"
+          name="surname"
       /></label>
     </div>
+
+    <label class="input">
+      Correo electrónico:
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="tu-email@example.com"
+      />
+    </label>
+
+    @if (emailField?.hasError('required') && emailField?.touched) {
+    <span class="text-red-400">El correo es obligatorio</span>
+    } @if (emailField?.hasError('email') && emailField?.touched) {
+    <span class="text-red-400">Debe ingresar un correo valido</span>
+    }
 
     <div id="type" class="type-user">
       <p>¿Que tipo de persona nos contacta?</p>
@@ -45,6 +68,7 @@
           type="text"
           formControlName="company"
           placeholder="El nombre de tu empresa"
+          name="companyName"
         />
       </label>
       @if (company?.hasError('required') && company?.touched) {
