@@ -7,11 +7,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormBuilderComponent } from '../../components/form-builder/form-builder.component';
-import { ValidationsComponent } from "../../components/validations/validations.component";
+import { ValidationsComponent } from '../../components/validations/validations.component';
+import { ConditionalComponent } from '../../components/conditional/conditional.component';
 
 @Component({
   selector: 'app-forms-control',
-  imports: [FormsModule, ReactiveFormsModule, FormBuilderComponent, ValidationsComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    FormBuilderComponent,
+    ValidationsComponent,
+    ConditionalComponent,
+  ],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.css',
 })

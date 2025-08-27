@@ -1,0 +1,57 @@
+<section>
+  <h2>Validación Condicional</h2>
+
+  <form (submit)="submit()" [formGroup]="form">
+    <div formGroupName="fullName">
+      <label class="input"
+        >Nombre:
+        <input type="text" placeholder="Tu nombre" formControlName="name"
+      /></label>
+
+      @if (nameField?.hasError('required') && nameField?.touched) {
+      <p class="text-red-400">El campo Nombre es requerido</p>
+      } @if (nameField?.touched && nameField?.hasError('minlength')) {
+      <p class="text-red-400">Debe ingresar al menos 3 caracteres</p>
+      }
+
+      <label class="input"
+        >Apellido
+        <input type="text" placeholder="Tu apellido" formControlName="surname"
+      /></label>
+    </div>
+
+    <div id="type" class="type-user">
+      <p>¿Que tipo de persona nos contacta?</p>
+      <label
+        ><input type="radio" formControlName="type" value="customer" />Persona
+        natural</label
+      >
+      <label
+        ><input
+          type="radio"
+          formControlName="type"
+          value="company"
+        />Empresa</label
+      >
+    </div>
+    @if (typeField?.hasError('required') && typeField?.touched) {
+    <span class="text-red-400">Debe seleccionar un tipo de persona</span>
+    }
+
+    <div>
+      <label class="input">
+        Nombre de la empresa
+        <input
+          type="text"
+          formControlName="company"
+          placeholder="El nombre de tu empresa"
+        />
+      </label>
+      @if (company?.hasError('required') && company?.touched) {
+      <span class="text-red-400">El nombre de la empresa es obligatorio</span>
+      }
+    </div>
+
+    <button type="submit">Contactar</button>
+  </form>
+</section>

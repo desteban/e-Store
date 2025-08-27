@@ -1,0 +1,19 @@
+form {
+  padding: 16px;
+  border: 1px solid rgb(221, 216, 216);
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.type-user {
+  margin: 1rem 0px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+button {
+  background-color: black;
+  color: white;
+  margin-top: 3rem;
+}
