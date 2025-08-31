@@ -1,0 +1,15 @@
+<div>
+  <label class="input">
+    {{ label }}
+    <input
+      [id]="id"
+      [name]="name"
+      [placeholder]="placeHolder"
+      [type]="type"
+      [ngModel]="currentValue"
+      (input)="handleInput($event)"
+      [disabled]="isDisabled"
+      (blur)="onBlur()"
+    />
+  </label>
+</div>

@@ -28,14 +28,14 @@
       /></label>
     </div>
 
-    <label class="input">
-      Correo electrónico:
-      <input
-        type="email"
-        formControlName="email"
-        placeholder="tu-email@example.com"
-      />
-    </label>
+    <components-input
+      id="email"
+      name="email"
+      label="Correo electrónico"
+      placeHolder="tu-email@example.com"
+      type="email"
+      formControlName="email"
+    />
 
     @if (emailField?.hasError('required') && emailField?.touched) {
     <span class="text-red-400">El correo es obligatorio</span>

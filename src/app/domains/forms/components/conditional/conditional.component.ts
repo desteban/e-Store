@@ -5,6 +5,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { InputComponent } from '@app/components/ui/input/input.component';
 
 interface ContactForm {
   fullName: {
@@ -17,7 +18,7 @@ interface ContactForm {
 
 @Component({
   selector: 'forms-conditional',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, InputComponent],
   templateUrl: './conditional.component.html',
   styleUrl: './conditional.component.css',
 })
@@ -27,7 +28,7 @@ export class ConditionalComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   form = this.formBuilder.group({
     fullName: this.formBuilder.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       surname: [''],
     }),
     email: ['', [Validators.required, Validators.email]],
