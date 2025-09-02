@@ -7,16 +7,29 @@
 
   <div class="main" id="main">
     <section aria-label="products" class="products">
-      <products-pagination [currentPage]="page" />
+      <products-pagination
+        [currentPage]="page"
+        [isNextPage]="products().length !== 0 && loading() !== true"
+      />
 
       <h1 class="text-xl font-bold">Products</h1>
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 p-3 mt-4 auto-rows-min">
-        @for (product of products(); track $index) {
+      <div
+        class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 p-3 mt-4 auto-rows-min"
+      >
+        @if (loading() === true) {
+        <div class="w-full my-11 flex items-center justify-center">
+          <components-ui-loader />
+          <p>Cargnado...</p>
+        </div>
+        } @for (product of products(); track $index) {
         <app-product [product]="product" (addToCart)="addProduct($event)" />
         }
       </div>
       <div id="off">
-        <products-pagination [currentPage]="page" />
+        <products-pagination
+          [currentPage]="page"
+          [isNextPage]="products().length !== 0 && loading() !== true"
+        />
       </div>
     </section>
 

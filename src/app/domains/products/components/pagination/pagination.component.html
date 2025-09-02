@@ -35,6 +35,7 @@
     {{ currentPage() }}
   </a>
 
+  @if (isNextPage) {
   <a
     [routerLink]="[]"
     [queryParams]="{ page: nextPage() }"
@@ -58,4 +59,5 @@
       />
     </svg>
   </a>
+  }
 </div>

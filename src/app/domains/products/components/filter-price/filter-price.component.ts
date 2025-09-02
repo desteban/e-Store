@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { Router } from '@angular/router';
 import { ScrollToService } from '@app/shared/services/scroll-to.service';
+import { ViewHiddenComponent } from "@app/components/ui/view-hidden/view-hidden.component";
 
 @Component({
   selector: 'products-filter-price',
-  imports: [FormsModule],
+  imports: [FormsModule, ViewHiddenComponent],
   templateUrl: './filter-price.component.html',
   styleUrl: './filter-price.component.css',
 })

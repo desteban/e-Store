@@ -1,4 +1,4 @@
-<a [routerLink]="['/product', product.id]">
+<a [routerLink]="['/product', product.id]" [title]="product.title">
   <article class="card">
     <picture>
       <img [src]="product.images[0]" [alt]="product.title" loading="lazy" />

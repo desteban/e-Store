@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, Input, input } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
@@ -8,6 +8,8 @@ import { RouterLinkWithHref } from '@angular/router';
   styleUrl: './pagination.component.css',
 })
 export class PaginationComponent {
+  @Input({ required: false }) isNextPage: boolean = true;
+
   private hash: string = 'main';
   currentPage = input<number>(1);
   nextPage = computed<number>(() => this.currentPage() + 1);
