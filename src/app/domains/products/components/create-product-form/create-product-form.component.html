@@ -1,0 +1,52 @@
+<form [formGroup]="form" (submit)="submitForm()">
+  <components-ui-input
+    id="name"
+    name="name"
+    label="Name"
+    placeHolder="Bike"
+    formControlName="name"
+    [error]="matchError('name')"
+  />
+
+  <components-ui-input
+    id="price"
+    name="price"
+    label="Price"
+    placeHolder="1000"
+    formControlName="price"
+    [error]="matchError('price')"
+  />
+
+  <components-ui-input
+    id="description"
+    name="description"
+    label="Description"
+    placeHolder="Description"
+    formControlName="description"
+    [error]="matchError('description')"
+  />
+
+  <div formGroupName="images">
+    <button (click)="addImageInput()" type="button">Agregar imagen</button>
+    @for (image of ImagesControls; track $index) {
+    <div class="input-images-container">
+      <components-ui-input
+        label="Image"
+        placeHolder="https://dominio.com/tu-imagen.webp"
+        [formControlName]="$index"
+        [error]="matchErrorControl(image)"
+      />
+      <button
+        type="button"
+        (click)="removeImageIn($index)"
+        class="trash-button"
+      >
+        <components-view-hidden text="Eliminar imagen" />
+        <assets-trash-icon size="32" stroke-width="2" />
+      </button>
+    </div>
+    }
+  </div>
+
+  <button type="submit">Crear</button>
+</form>

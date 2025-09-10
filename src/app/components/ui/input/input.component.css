@@ -1,0 +1,22 @@
+label.required::after,
+.required {
+  content: " *";
+  color: red;
+}
+
+
+input {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgb(172, 171, 171);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+input:disabled {
+  background-color: rgba(172, 171, 171, 0.571);
+  cursor: not-allowed;
+}

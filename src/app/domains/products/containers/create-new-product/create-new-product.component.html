@@ -1,0 +1,12 @@
+<div>
+  <div class="container">
+    <products-components-create-product-form
+      [form]="form"
+      [images]="images"
+      (addImage)="addImage()"
+      (removeImage)="removeImage($event)"
+      (submitEvent)="createNewProduct()"
+      [errorsForm]="errors"
+    />
+  </div>
+</div>
