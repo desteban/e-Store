@@ -9,6 +9,8 @@ import {
 import { CreateProductFormComponent } from '../../components/create-product-form/create-product-form.component';
 import { ErrorCreateProduct } from '../../models/ErrorsForms';
 import { ProductService } from '../../services/product.service';
+import { StepperComponent } from '@app/components/ui/stepper/stepper.component';
+import { Step } from '@app/components/ui/stepper/Step';
 
 const ErrorsDefault: ErrorCreateProduct = {
   name: null,
@@ -19,11 +21,15 @@ const ErrorsDefault: ErrorCreateProduct = {
 
 @Component({
   selector: 'product-create-new-product',
-  imports: [CreateProductFormComponent],
+  imports: [CreateProductFormComponent, StepperComponent],
   templateUrl: './create-new-product.component.html',
   styleUrl: './create-new-product.component.css',
 })
 export class CreateNewProductComponent {
+  steps: Step[] = [{ title: 'Product' }, { title: 'Photo' }];
+  totalSteps: number = this.steps.length;
+  currentStep: number = 0;
+
   productsService = inject(ProductService);
   formBuilder = inject(NonNullableFormBuilder);
   errors: ErrorCreateProduct = ErrorsDefault;
@@ -72,5 +78,18 @@ export class CreateNewProductComponent {
     // this.productsService.createProduct()
 
     console.log('Product', productDTO);
+  }
+
+  goToStep(step: number) {
+    const permitChangeStep = this.isChangeStep(step);
+    if (permitChangeStep) {
+      return;
+    }
+
+    this.currentStep = step;
+  }
+
+  private isChangeStep(step: number): boolean {
+    return step >= this.totalSteps || (step === 1 && this.form.invalid);
   }
 }

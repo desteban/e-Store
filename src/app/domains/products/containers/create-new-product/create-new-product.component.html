@@ -1,5 +1,12 @@
 <div>
   <div class="container">
+    {{ currentStep }}
+    <components-ui-stepper
+      [steps]="steps"
+      [currentStep]="currentStep"
+      (goToStep)="goToStep($event)"
+    />
+    @if ( currentStep === 0 ) {
     <products-components-create-product-form
       [form]="form"
       [images]="images"
@@ -8,5 +15,6 @@
       (submitEvent)="createNewProduct()"
       [errorsForm]="errors"
     />
+    }
   </div>
 </div>

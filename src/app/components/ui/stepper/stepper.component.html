@@ -1,0 +1,27 @@
+<ol
+  class="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse"
+>
+  @for (step of steps; track $index) {
+  <li
+    class="flex items-center text-blue-600 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse"
+  >
+    <button
+      (click)="changeStep($index)"
+      [disabled]="disableStep($index)"
+      [ariaLabel]="ariaLabelButton($index)"
+    >
+      <span
+        class="flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500"
+      >
+        {{ $index + 1 }}
+      </span>
+      <span>
+        <h3 class="font-medium leading-tight">{{ step.title }}</h3>
+        @if ( step.description ) {
+        <p class="text-sm">{{ step.description }}</p>
+        }
+      </span>
+    </button>
+  </li>
+  }
+</ol>
