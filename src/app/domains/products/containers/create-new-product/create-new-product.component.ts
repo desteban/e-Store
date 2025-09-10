@@ -16,6 +16,7 @@ import { ProductService } from '../../services/product.service';
 import { StepperComponent } from '@app/components/ui/stepper/stepper.component';
 import { Step } from '@app/components/ui/stepper/Step';
 import { ImagesProductComponent } from '../../components/images-product/images-product.component';
+import { IsNumberValidator } from '@app/shared/validators/IsNumberValidator';
 
 const ErrorsDefault: ErrorCreateProduct = {
   name: null,
@@ -51,7 +52,7 @@ export class CreateNewProductComponent {
   errorsImages: ErrorImagesCreateProduct = ErrorsDefaultImages;
   form = this.formBuilder.group({
     name: ['', [Validators.required]],
-    price: ['', [Validators.required, Validators.min(1)]],
+    price: ['', [Validators.required, Validators.min(1), IsNumberValidator()]],
     description: ['', [Validators.required, Validators.minLength(10)]],
   });
   formImages = this.formBuilder.array([

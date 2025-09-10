@@ -8,6 +8,8 @@ import {
 import { InputComponent } from '@app/components/ui/input/input.component';
 import { ErrorCreateProduct } from '../../models/ErrorsForms';
 
+type ErrorMessageFn = (control: AbstractControl) => string;
+
 @Component({
   selector: 'products-components-create-product-form',
   imports: [InputComponent, ReactiveFormsModule],
@@ -41,29 +43,27 @@ export class CreateProductFormComponent {
       return null;
     }
 
-    return this.matchErrorControl(control, controlName);
+    return this.matchErrorControl(control);
   }
 
-  matchErrorControl(
-    control: AbstractControl<any, any>,
-    controlName: string = ''
-  ): string | null {
+  errorMessages: { [key: string]: ErrorMessageFn } = {
+    required: (control) => 'This field is required.',
+    minlength: (control) =>
+      `The minimum length is ${
+        control.getError('minlength').requiredLength
+      } characters.`,
+    min: (control) => `The minimum value is ${control.getError('min').min}.`,
+    isNumber: () => 'The field is not a number.',
+  };
+
+  matchErrorControl(control: AbstractControl<any, any>): string | null {
     if (!control.errors || !control.touched) {
       return null;
     }
 
-    if (control.hasError('required')) {
-      return `The field "${controlName}" is required.`;
-    }
-    if (control.hasError('minlength')) {
-      return `The minimum length for "${controlName}" is ${
-        control.getError('minlength').requiredLength
-      } characters.`;
-    }
-    if (control.hasError('min')) {
-      return `The minimum value allowed for "${controlName}" is ${
-        control.getError('min').min
-      }.`;
+    const errorKey = Object.keys(control.errors)[0];
+    if (errorKey && this.errorMessages[errorKey]) {
+      return this.errorMessages[errorKey](control);
     }
 
     return null;
