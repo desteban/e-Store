@@ -21,10 +21,6 @@ export class CreateProductFormComponent {
 
   @Output() submitEvent = new EventEmitter<void>();
 
-  get ImagesControls() {
-    return this.images.controls;
-  }
-
   get name() {
     return this.form.get('name');
   }

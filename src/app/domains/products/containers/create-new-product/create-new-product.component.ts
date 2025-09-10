@@ -80,19 +80,20 @@ export class CreateNewProductComponent {
     this.form.markAllAsTouched();
 
     if (this.form.invalid) {
-      console.error('Formulario no valido', this.form.value);
       return;
     }
 
     const dataForm = this.form.getRawValue();
-    // const productDTO: CreateProductDTO = {
-    //   ...dataForm,
-    //   title: dataForm.name,
-    //   category: { id: 0, image: '', name: '' },
-    //   price: +dataForm.price,
-    // };
+    const images: string[] = this.images.value;
+    const productDTO: CreateProductDTO = {
+      ...dataForm,
+      images,
+      title: dataForm.name,
+      category: { id: 0, image: '', name: '' },
+      price: +dataForm.price,
+    };
 
-    // console.log('Product', productDTO);
+    console.log('Product', productDTO);
   }
 
   goToStep(step: number) {
@@ -113,6 +114,8 @@ export class CreateNewProductComponent {
   }
 
   submitProductImages() {
+    console.log('data', this.formImages.value);
+
     this.images.markAllAsTouched();
     this.form.markAllAsTouched();
     if (this.images.invalid && this.form.invalid) {

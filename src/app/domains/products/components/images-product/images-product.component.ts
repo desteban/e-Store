@@ -2,16 +2,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
+  FormControl,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ErrorImagesCreateProduct } from '../../models/ErrorsForms';
-import { ViewHiddenComponent } from "@app/components/ui/view-hidden/view-hidden.component";
-import { TrashIconComponent } from "@app/assets/trash-icon/trash-icon.component";
-import { InputComponent } from "@app/components/ui/input/input.component";
+import { ViewHiddenComponent } from '@app/components/ui/view-hidden/view-hidden.component';
+import { TrashIconComponent } from '@app/assets/trash-icon/trash-icon.component';
+import { InputComponent } from '@app/components/ui/input/input.component';
 
 @Component({
   selector: 'product-create-new-product-images',
-  imports: [ReactiveFormsModule, ViewHiddenComponent, TrashIconComponent, InputComponent],
+  imports: [
+    ReactiveFormsModule,
+    ViewHiddenComponent,
+    TrashIconComponent,
+    InputComponent,
+  ],
   templateUrl: './images-product.component.html',
   styleUrl: './images-product.component.css',
 })
@@ -23,8 +29,8 @@ export class ImagesProductComponent {
   @Output() removeImage = new EventEmitter<number>();
   @Output() submitEvent = new EventEmitter<void>();
 
-  get imageControls() {
-    return this.images.controls;
+  get ImagesControls(): FormControl[] {
+    return this.images.controls as FormControl[];
   }
 
   addImageInput(): void {
@@ -36,10 +42,10 @@ export class ImagesProductComponent {
   }
 
   matchErrorControl(
-    control: AbstractControl<any, any>,
+    control: FormControl,
     controlName: string = ''
   ): string | null {
-    if (!control.errors || !control.touched) {
+    if (!control.touched) {
       return null;
     }
 
@@ -60,7 +66,13 @@ export class ImagesProductComponent {
     return null;
   }
 
-  submitForm(): void {
+  submitForm(e: Event): void {
+    e.preventDefault();
+    this.images.markAllAsTouched();
+
+    if (this.images.invalid) {
+      return;
+    }
     this.submitEvent.emit();
   }
 }

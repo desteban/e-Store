@@ -1,22 +1,27 @@
 <div>
-  <div class="container">
+  <div class="container px-6">
     {{ currentStep }}
     <components-ui-stepper
       [steps]="steps"
       [currentStep]="currentStep"
       (goToStep)="goToStep($event)"
     />
-    @if ( currentStep === 1 ) {
+    @if ( currentStep === 0 ) {
     <products-components-create-product-form
       [form]="form"
       [images]="images"
       (submitEvent)="submitProduct()"
       [errorsForm]="errors"
     />
-    } @if ( currentStep === 0 ) {
+    }
+    <!--  -->
+    @if ( currentStep === 1 ) {
     <product-create-new-product-images
       [images]="formImages"
       [errorsForm]="errorsImages"
+      (addImage)="addImage()"
+      (removeImage)="removeImage($event)"
+      (submitEvent)="submitProductImages()"
     />
     }
   </div>

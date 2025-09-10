@@ -1,17 +1,27 @@
-<form (submit)="submitForm()">
-  <button (click)="addImageInput()" type="button">+ Agregar imagen</button>
-  @for (image of imageControls; track $index) {
-  <div class="input-images-container">
-    <components-ui-input
-      label="Image"
-      placeHolder="https://dominio.com/tu-imagen.webp"
-      [formControlName]="$index"
-      [error]="matchErrorControl(image)"
-    />
+<form (submit)="submitForm($event)">
+  <button type="submit">Guardar</button>
+  @for (image of ImagesControls; track $index) {
+  <div class="form-images">
+    <div class="input-images-container">
+      <components-ui-input
+        label="Image"
+        placeHolder="https://dominio.com/tu-imagen.webp"
+        [error]="matchErrorControl(image)"
+        [formControl]="image"
+      />
+    </div>
+
     <button type="button" (click)="removeImageIn($index)" class="trash-button">
       <components-view-hidden text="Eliminar imagen" />
       <assets-trash-icon size="32" stroke-width="2" />
     </button>
   </div>
   }
+  <button
+    class="mt-6 border border-blue-500 border-solid"
+    (click)="addImageInput()"
+    type="button"
+  >
+    + Agregar imagen
+  </button>
 </form>
