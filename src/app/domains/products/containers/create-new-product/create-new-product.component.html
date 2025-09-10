@@ -6,14 +6,17 @@
       [currentStep]="currentStep"
       (goToStep)="goToStep($event)"
     />
-    @if ( currentStep === 0 ) {
+    @if ( currentStep === 1 ) {
     <products-components-create-product-form
       [form]="form"
       [images]="images"
-      (addImage)="addImage()"
-      (removeImage)="removeImage($event)"
-      (submitEvent)="createNewProduct()"
+      (submitEvent)="submitProduct()"
       [errorsForm]="errors"
+    />
+    } @if ( currentStep === 0 ) {
+    <product-create-new-product-images
+      [images]="formImages"
+      [errorsForm]="errorsImages"
     />
     }
   </div>

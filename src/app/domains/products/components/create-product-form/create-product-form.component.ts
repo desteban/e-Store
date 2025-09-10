@@ -7,12 +7,10 @@ import {
 } from '@angular/forms';
 import { InputComponent } from '@app/components/ui/input/input.component';
 import { ErrorCreateProduct } from '../../models/ErrorsForms';
-import { TrashIconComponent } from '@app/assets/trash-icon/trash-icon.component';
-import { ViewHiddenComponent } from "@app/components/ui/view-hidden/view-hidden.component";
 
 @Component({
   selector: 'products-components-create-product-form',
-  imports: [InputComponent, ReactiveFormsModule, TrashIconComponent, ViewHiddenComponent],
+  imports: [InputComponent, ReactiveFormsModule],
   templateUrl: './create-product-form.component.html',
   styleUrl: './create-product-form.component.css',
 })
@@ -21,8 +19,6 @@ export class CreateProductFormComponent {
   @Input({ required: true }) images!: FormArray;
   @Input({ required: true }) errorsForm!: ErrorCreateProduct;
 
-  @Output() addImage = new EventEmitter<void>();
-  @Output() removeImage = new EventEmitter<number>();
   @Output() submitEvent = new EventEmitter<void>();
 
   get ImagesControls() {
@@ -33,15 +29,13 @@ export class CreateProductFormComponent {
     return this.form.get('name');
   }
 
-  addImageInput(): void {
-    this.addImage.emit();
-  }
-
-  removeImageIn(index: number): void {
-    this.removeImage.emit(index);
-  }
-
   submitForm(): void {
+    this.form.markAllAsTouched();
+    if (this.form.invalid) {
+      console.error('error', this.form.value);
+      return;
+    }
+
     this.submitEvent.emit();
   }
 
