@@ -1,0 +1,32 @@
+<div>
+  <label for="seachCategori">Category</label>
+  <input
+    id="seachCategori"
+    type="text"
+    placeholder="Clothes"
+    [formControl]="searchControl"
+  />
+
+  <ul aria-label="List of categories">
+    @for (category of categories; track $index) {
+    <li>
+      <button
+        class="category"
+        [class.active]="selectedCategory === $index"
+        [ariaLabel]="`Select category: ${category.name}`"
+        (click)="onSelectCategory($index)"
+      >
+        <picture class="size-11 overflow-hidden rounded-full block">
+          <img
+            [src]="category.image"
+            [alt]="'Image for the picture: ' + category.name"
+            loading="lazy"
+            class="w-full h-full object-contain"
+          />
+        </picture>
+        <p>{{ category.name }}</p>
+      </button>
+    </li>
+    }
+  </ul>
+</div>

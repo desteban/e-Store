@@ -9,3 +9,8 @@ export interface Product {
   category: Category;
   images: string[];
 }
+
+export interface CreateProductDTO
+  extends Omit<Product, 'id' | 'slug' | 'category'> {
+  categoryId: number;
+}

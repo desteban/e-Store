@@ -16,6 +16,11 @@
     }
     <!--  -->
     @if ( currentStep === 1 ) {
+    <products-list-categories (selectCategory)="selectCategory($event)" />
+    }
+
+    <!--  -->
+    @if ( currentStep === 2 ) {
     <product-create-new-product-images
       [images]="formImages"
       [errorsForm]="errorsImages"

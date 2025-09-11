@@ -15,12 +15,12 @@
       >
         {{ $index + 1 }}
       </span>
-      <span>
-        <h3 class="font-medium leading-tight">{{ step.title }}</h3>
+      <div>
+        <span class="font-medium leading-tight">{{ step.title }}</span>
         @if ( step.description ) {
         <p class="text-sm">{{ step.description }}</p>
         }
-      </span>
+      </div>
     </button>
   </li>
   }
