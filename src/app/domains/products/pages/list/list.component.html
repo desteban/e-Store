@@ -21,7 +21,9 @@
           <components-ui-loader />
           <p>Cargnado...</p>
         </div>
-        } @for (product of products(); track $index) {
+        }
+        <!--  -->
+        @for (product of products(); track $index) {
         <app-product [product]="product" (addToCart)="addProduct($event)" />
         }
       </div>

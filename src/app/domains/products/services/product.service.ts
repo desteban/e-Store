@@ -60,7 +60,7 @@ export class ProductService {
 
   /**
    * Obtiene los detalles de un solo producto por su ID.
-   * @param {string} id - El ID del producto que se desea buscar.
+   * @param {string} slug - El slug del producto que se desea buscar.
    * @returns Un Observable que emite un único objeto de tipo `Product`.
    * @example
    * // Uso para obtener un producto específico por su ID
@@ -68,8 +68,8 @@ export class ProductService {
    * console.log(product);
    * });
    */
-  getOne(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.url}/${id}`);
+  getOne(slug: string): Observable<Product> {
+    return this.http.get<Product>(`${this.url}/slug/${slug}`);
   }
   /**
    * Crea un nuevo producto.
@@ -92,5 +92,11 @@ export class ProductService {
    */
   public createProduct(dto: CreateProductDTO): Observable<Product> {
     return this.http.post<Product>(this.url, dto);
+  }
+
+  public getRelatedProducts(productSlug: string): Observable<Product[]> {
+    const url: string = this.url + `/slug/${productSlug}/related`;
+
+    return this.http.get<Product[]>(url);
   }
 }

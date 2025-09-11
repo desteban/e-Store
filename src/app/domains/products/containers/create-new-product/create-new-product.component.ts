@@ -42,22 +42,18 @@ const ErrorsDefaultImages: ErrorImagesCreateProduct = {
   styleUrl: './create-new-product.component.css',
 })
 export class CreateNewProductComponent {
-  ProductService: ProductService = inject(ProductService);
+  productsService = inject(ProductService);
+  formBuilder = inject(NonNullableFormBuilder);
 
-  steps: Step[] = [
+  readonly steps: Step[] = [
     { title: 'Product' },
     { title: 'Category' },
     { title: 'Photo' },
   ];
-  totalSteps: number = this.steps.length;
+  readonly totalSteps: number = this.steps.length;
   currentStep: number = 0;
-  private validatorsImages: ((
-    control: AbstractControl
-  ) => ValidationErrors | null)[] = [Validators.required];
 
   category: Category = { id: -1, image: '', name: '' };
-  productsService = inject(ProductService);
-  formBuilder = inject(NonNullableFormBuilder);
   errors: ErrorCreateProduct = ErrorsDefault;
   errorsImages: ErrorImagesCreateProduct = ErrorsDefaultImages;
   form = this.formBuilder.group({
@@ -66,19 +62,21 @@ export class CreateNewProductComponent {
     description: ['', [Validators.required, Validators.minLength(10)]],
   });
   formImages = this.formBuilder.array([
-    this.formBuilder.control('', this.validatorsImages),
+    this.formBuilder.control('', this.validatorsImage),
   ]);
-
-  get name() {
-    return this.form.get('name');
-  }
 
   get images(): FormArray {
     return this.formImages as FormArray;
   }
 
+  get validatorsImage(): ((
+    control: AbstractControl
+  ) => ValidationErrors | null)[] {
+    return [Validators.required];
+  }
+
   addImage(): void {
-    this.images.push(this.formBuilder.control('', [Validators.required]));
+    this.images.push(this.formBuilder.control('', this.validatorsImage));
   }
 
   removeImage(index: number): void {
