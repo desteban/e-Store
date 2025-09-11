@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Product } from '../../../shared/models/Product.model';
+import {
+  CreateProductDTO,
+  Product,
+} from '../../../shared/models/Product.model';
 import FiltersProducts from '../models/FiltersProducts';
 import { Pagination } from '@app/shared/models/Pagination';
-import { CreateProductDTO } from '../models/ProductsDTO';
 import { Observable } from 'rxjs';
 
 interface getProductsProps extends FiltersProducts, Pagination {}

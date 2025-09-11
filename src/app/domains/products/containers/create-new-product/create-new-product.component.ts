@@ -42,6 +42,8 @@ const ErrorsDefaultImages: ErrorImagesCreateProduct = {
   styleUrl: './create-new-product.component.css',
 })
 export class CreateNewProductComponent {
+  ProductService: ProductService = inject(ProductService);
+
   steps: Step[] = [
     { title: 'Product' },
     { title: 'Category' },
@@ -123,7 +125,16 @@ export class CreateNewProductComponent {
     this.createNewProduct();
   }
 
-  createNewProduct() {
+  private createNewProduct(): void {
+    this.productsService.createProduct(this.productDTO).subscribe({
+      complete() {
+        alert('Producto agregado con éxito');
+      },
+      error(err) {},
+    });
+  }
+
+  private get productDTO(): CreateProductDTO {
     const dataForm = this.form.getRawValue();
     const images: string[] = this.images.value;
     const productDTO: CreateProductDTO = {
@@ -134,6 +145,6 @@ export class CreateNewProductComponent {
       price: +dataForm.price,
     };
 
-    console.log('Product', productDTO);
+    return productDTO;
   }
 }
