@@ -103,18 +103,16 @@ export default class EditProductComponent implements OnInit {
   }
 
   deleteProduct(payload: ProductDeletionPayload) {
-    const { index, product } = payload;
-    this.removeProduct(product);
+    const { product } = payload;
+
+    const el = document.querySelector(`#product-item-${product.id}`);
+    el?.classList.add('load-pulse');
 
     this.productsServices.delete(product.id.toString()).subscribe({
       next: (status: boolean) => {
-        if (status !== true) {
-          this.addProduct(index, product);
+        if (status === true) {
+          this.removeProduct(product);
         }
-      },
-      error: () => {
-        const index: number = payload.index;
-        this.addProduct(index, product);
       },
     });
   }

@@ -21,7 +21,7 @@
         </div>
         }
         <!--  -->
-        <table>
+        <table class="overflow-hidden">
           <thead>
             <tr>
               <th scope="col">Image</th>
@@ -34,6 +34,8 @@
           <tbody>
             @for (product of products(); track $index) {
             <tr
+              [id]="`product-item-${product.id}`"
+              class=""
               product-item-product-edit
               [product]="product"
               [index]="$index"

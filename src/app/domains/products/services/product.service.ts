@@ -7,7 +7,7 @@ import {
 } from '../../../shared/models/Product.model';
 import FiltersProducts from '../models/FiltersProducts';
 import { Pagination } from '@app/shared/models/Pagination';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 
 interface getProductsProps extends FiltersProducts, Pagination {}
 
@@ -17,6 +17,8 @@ interface getProductsProps extends FiltersProducts, Pagination {}
 export class ProductService {
   private http = inject(HttpClient);
   private readonly url: string = 'https://api.escuelajs.co/api/v1/products';
+  private readonly retry: number = 2;
+
   /**
    * Obtiene una lista de todos los productos sin aplicar filtros.
    * Este método es ideal para obtener un listado completo y sin paginación.
@@ -123,6 +125,6 @@ export class ProductService {
 
   public delete(id: string): Observable<boolean> {
     const url = this.url + `/${id}`;
-    return this.http.delete<boolean>(url);
+    return this.http.delete<boolean>(url).pipe(retry(this.retry));
   }
 }

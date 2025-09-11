@@ -85,3 +85,61 @@ aside {
     @apply font-semibold mb-3;
   }
 }
+
+
+.load-pulse {
+  -webkit-animation: disabled-element 1s infinite ease-in-out;
+  animation: disabled-element 1s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@-webkit-keyframes disabled-element {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.load-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Empieza fuera del elemento por la izquierda */
+  width: 30%;
+  height: 4px;
+  /* Grosor de la línea */
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Color de la línea, puedes ajustarlo */
+  -webkit-animation: loading-line 1.5s infinite linear;
+  animation: loading-line 1.5s infinite linear;
+  -webkit-animation-delay: 30ms;
+  animation-delay: 30ms;
+  /* Animación de la línea */
+}
+
+@-webkit-keyframes loading-line {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes loading-line {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
