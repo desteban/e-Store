@@ -14,3 +14,8 @@ export interface CreateProductDTO
   extends Omit<Product, 'id' | 'slug' | 'category'> {
   categoryId: number;
 }
+
+export interface updateProductDTO
+  extends Partial<Omit<Product, 'id' | 'slug' | 'category'>> {
+  categoryId?: number;
+}

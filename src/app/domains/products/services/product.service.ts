@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import {
   CreateProductDTO,
   Product,
+  updateProductDTO,
 } from '../../../shared/models/Product.model';
 import FiltersProducts from '../models/FiltersProducts';
 import { Pagination } from '@app/shared/models/Pagination';
@@ -94,9 +95,34 @@ export class ProductService {
     return this.http.post<Product>(this.url, dto);
   }
 
+  /**
+   * Obtener un listado de productos relacionado con otro
+   * @param productSlug Slug del articulo para obtener productos relacionados con este
+   * @returns {Product[]}
+   *
+   * @example
+   * const productSlug: string = 'laptop'
+   * this.getRelatedProducts(productSlug).subscribe({
+   *  next: (products: Products[]) => {...}
+   * })
+   *
+   */
   public getRelatedProducts(productSlug: string): Observable<Product[]> {
     const url: string = this.url + `/slug/${productSlug}/related`;
 
     return this.http.get<Product[]>(url);
+  }
+
+  public updateProduct(
+    id: string,
+    product: updateProductDTO
+  ): Observable<Product> {
+    const url: string = this.url + `/${id}`;
+    return this.http.put<Product>(url, product);
+  }
+
+  public delete(id: string): Observable<boolean> {
+    const url = this.url + `/${id}`;
+    return this.http.delete<boolean>(url);
   }
 }

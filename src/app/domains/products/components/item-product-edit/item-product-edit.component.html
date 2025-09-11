@@ -1,0 +1,36 @@
+<td>
+  <picture class="image-container">
+    <img
+      [src]="product.images[0]"
+      [alt]="product.title"
+      loading="lazy"
+      class=""
+    />
+  </picture>
+</td>
+
+<td>
+  <div class="details">
+    <p class="details-title">{{ product.title }}</p>
+    <p class="details-price">${{ Price }}</p>
+  </div>
+</td>
+
+<td>
+  <div class="category">
+    <p class="category-name">{{ product.category.name }}</p>
+  </div>
+</td>
+
+<td>
+  <div class="options">
+    <button
+      [ariaLabel]="`Delete Product: ${product.title}`"
+      [title]="`Delete Product: ${product.title}`"
+      (click)="onDelete()"
+    >
+      <components-view-hidden [text]="`Delete Product: ${product.title}`" />
+      <assets-trash-icon />
+    </button>
+  </div>
+</td>

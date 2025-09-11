@@ -30,6 +30,11 @@ export const routes: Routes = [
           import('@domains/products/pages/add-product/add-product.component'),
       },
       {
+        path: 'products/edit',
+        loadComponent: () =>
+          import('@domains/products/pages/edit-product/edit-product.component'),
+      },
+      {
         path: 'product/:id',
         loadComponent: () =>
           import('@domains/products/pages/detail/detail.component'),

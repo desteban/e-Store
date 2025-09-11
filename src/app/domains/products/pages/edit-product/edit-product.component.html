@@ -1,0 +1,60 @@
+<main class="px-4">
+  <div class="w-full py-3 my-4">
+    <product-search />
+  </div>
+
+  <products-active-filters />
+
+  <div class="main" id="main">
+    <section aria-label="products" class="products">
+      <products-pagination
+        [currentPage]="page"
+        [isNextPage]="products().length !== 0 && loading() !== true"
+      />
+
+      <h1 class="text-xl font-bold">Products</h1>
+      <div class="">
+        @if (loading() === true) {
+        <div class="w-full my-11 flex items-center justify-center">
+          <components-ui-loader />
+          <p>Cargnado...</p>
+        </div>
+        }
+        <!--  -->
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Name / Price</th>
+              <th scope="col">Category</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (product of products(); track $index) {
+            <tr
+              product-item-product-edit
+              [product]="product"
+              [index]="$index"
+              (deleteProduct)="deleteProduct($event)"
+              [ariaLabel]="`Details product: ${product.title}`"
+            ></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div id="off">
+        <products-pagination
+          [currentPage]="page"
+          [isNextPage]="products().length !== 0 && loading() !== true"
+        />
+      </div>
+    </section>
+
+    <aside aria-label="filters">
+      <products-filter-category [categories]="categories()" />
+      <products-filter-price />
+    </aside>
+  </div>
+</main>

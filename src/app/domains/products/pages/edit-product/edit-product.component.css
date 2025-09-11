@@ -1,0 +1,8 @@
+.main {
+  @apply container mx-auto md:flex relative mt-10 pt-5;
+}
+
+.products {
+  margin-right: 24px;
+  @apply w-full md:w-2/3;
+}
