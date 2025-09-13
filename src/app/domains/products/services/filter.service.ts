@@ -7,12 +7,12 @@ export type FilterKeys = keyof FiltersProducts;
   providedIn: 'root',
 })
 export class FilterService {
-  categoryId = signal<string>('');
   title = signal<string>('');
-  filters = computed<FiltersProducts>(() => this.getFilters());
-  activeFilters = computed<FilterKeys[]>(() => this.getActiveFilters());
+  categoryId = signal<string>('');
   minPrice = signal<number | undefined>(undefined);
   maxPrice = signal<number | undefined>(undefined);
+  private filter = computed<FiltersProducts>(() => this.getFilters());
+  activeFilters = computed<FilterKeys[]>(() => this.getActiveFilters());
 
   private getFilters(): FiltersProducts {
     const filters: FiltersProducts = {};
@@ -37,8 +37,8 @@ export class FilterService {
   }
 
   private getActiveFilters(): FilterKeys[] {
-    return Object.keys(this.filters()).filter(
-      (key) => this.filters()[key as FilterKeys] !== undefined
+    return Object.keys(this.filter()).filter(
+      (key) => this.filter()[key as FilterKeys] !== undefined
     ) as FilterKeys[];
   }
 
@@ -54,6 +54,22 @@ export class FilterService {
 
   changeMinPrice(price: number | undefined) {
     this.minPrice.set(price);
+  }
+
+  get filters(): FiltersProducts {
+    const minPrice: number | undefined = this.minPriceFilter;
+    return { ...this.filter(), price_min: minPrice };
+  }
+
+  private get minPriceFilter() {
+    const minPrice = this.minPrice();
+    const maxPrice = this.maxPrice();
+
+    if (minPrice === undefined && maxPrice === undefined) return undefined;
+
+    if (minPrice === undefined && maxPrice !== undefined) return 1;
+
+    return minPrice;
   }
 
   syncFilters(filters: FiltersProducts) {

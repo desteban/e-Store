@@ -6,3 +6,12 @@
   margin-right: 24px;
   @apply w-full md:w-2/3;
 }
+
+
+tbody tr {
+  transition: background-color .3s ease-in-out;
+}
+
+tbody tr:hover {
+  background-color: rgb(224, 223, 223);
+}

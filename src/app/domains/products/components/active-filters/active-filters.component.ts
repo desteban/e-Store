@@ -41,6 +41,6 @@ export class ActiveFiltersComponent {
 
   removeCategory(category: FilterKeys): void {
     this.filtersService.removeFilter(category);
-    this.router.navigate([''], { queryParams: this.filtersService.filters() });
+    this.router.navigate([''], { queryParams: this.filtersService.filters });
   }
 }

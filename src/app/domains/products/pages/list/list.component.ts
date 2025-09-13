@@ -12,7 +12,7 @@ import { FilterService } from '../../services/filter.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { ActiveFiltersComponent } from '../../components/active-filters/active-filters.component';
 import { PaginationService } from '@app/shared/services/pagination.service';
-import { LoaderComponent } from "@app/components/ui/loader/loader.component";
+import { LoaderComponent } from '@app/components/ui/loader/loader.component';
 
 @Component({
   selector: 'app-list',
@@ -23,8 +23,8 @@ import { LoaderComponent } from "@app/components/ui/loader/loader.component";
     FilterPriceComponent,
     PaginationComponent,
     ActiveFiltersComponent,
-    LoaderComponent
-],
+    LoaderComponent,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
@@ -62,7 +62,7 @@ export default class ListComponent {
     this.loading.set(true);
     this.productsServices
       .getProductsByFilters({
-        ...this.filtersService.filters(),
+        ...this.filtersService.filters,
         ...this.paginationService.pagination(),
       })
       .subscribe({

@@ -2,6 +2,7 @@ import {
   Component,
   inject,
   Input,
+  OnChanges,
   OnInit,
   signal,
   SimpleChanges,
@@ -20,6 +21,7 @@ import { FilterCategoryComponent } from '../../components/filter-category/filter
 import { FilterPriceComponent } from '../../components/filter-price/filter-price.component';
 import { ItemProductEditComponent } from '../../components/item-product-edit/item-product-edit.component';
 import { ProductDeletionPayload } from '../../models/ProducPayload';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-edit-product',
@@ -35,7 +37,7 @@ import { ProductDeletionPayload } from '../../models/ProducPayload';
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.css',
 })
-export default class EditProductComponent implements OnInit {
+export default class EditProductComponent implements OnInit, OnChanges {
   products = signal<Product[]>([]);
   categories = signal<Category[]>([]);
   loading = signal<boolean>(false);
@@ -62,9 +64,12 @@ export default class EditProductComponent implements OnInit {
 
   private getProducts() {
     this.loading.set(true);
+    const filter = this.filtersService.filters;
+    console.log('Filtros', filter);
+
     this.productsServices
       .getProductsByFilters({
-        ...this.filtersService.filters(),
+        ...filter,
         ...this.paginationService.pagination(),
       })
       .subscribe({
@@ -73,6 +78,15 @@ export default class EditProductComponent implements OnInit {
           this.products.set(products);
         },
       });
+  }
+
+  get Filters() {
+    return {
+      categoryId: this.categoryId,
+      title: this.title,
+      price_min: this.price_min,
+      price_max: this.price_max,
+    };
   }
 
   private getCategories() {
@@ -87,12 +101,8 @@ export default class EditProductComponent implements OnInit {
   }
 
   private syncFilters() {
-    this.filtersService.syncFilters({
-      categoryId: this.categoryId,
-      title: this.title,
-      price_min: this.price_min,
-      price_max: this.price_max,
-    });
+    const filters = this.Filters;
+    this.filtersService.syncFilters(filters);
   }
 
   private syncPagination() {
@@ -108,26 +118,26 @@ export default class EditProductComponent implements OnInit {
     const el = document.querySelector(`#product-item-${product.id}`);
     el?.classList.add('load-pulse');
 
-    this.productsServices.delete(product.id.toString()).subscribe({
-      next: (status: boolean) => {
-        if (status === true) {
-          this.removeProduct(product);
-        }
-      },
-    });
+    this.productsServices
+      .delete(product.id.toString())
+      .pipe(
+        finalize(() => {
+          console.log('from finalize');
+          el?.classList.remove('load-pulse');
+        })
+      )
+      .subscribe({
+        next: (status: boolean) => {
+          if (status === true) {
+            this.removeProduct(product);
+          }
+        },
+      });
   }
 
   private removeProduct(productRemove: Product): void {
     this.products.update((products) =>
       products.filter((product) => product.id !== productRemove.id)
     );
-  }
-
-  private addProduct(index: number, product: Product): void {
-    this.products.update((products) => {
-      const newProducts: Product[] = products;
-      newProducts.splice(index, 0, product);
-      return newProducts;
-    });
   }
 }

@@ -20,7 +20,7 @@ export class SearchComponent {
   search(event: Event) {
     event.preventDefault();
     this.router.navigate(['/'], {
-      queryParams: this.filters(),
+      queryParams: this.filters,
     });
   }
 }

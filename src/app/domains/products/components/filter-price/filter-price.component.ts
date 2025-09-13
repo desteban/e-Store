@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { Router } from '@angular/router';
 import { ScrollToService } from '@app/shared/services/scroll-to.service';
-import { ViewHiddenComponent } from "@app/components/ui/view-hidden/view-hidden.component";
+import { ViewHiddenComponent } from '@app/components/ui/view-hidden/view-hidden.component';
 
 @Component({
   selector: 'products-filter-price',
@@ -12,6 +12,9 @@ import { ViewHiddenComponent } from "@app/components/ui/view-hidden/view-hidden.
   styleUrl: './filter-price.component.css',
 })
 export class FilterPriceComponent {
+  @Input({ required: false }) page: string = '';
+
+  private router: Router = inject(Router);
   private productsFilterService = inject(FilterService);
   private scrollService = inject(ScrollToService);
   maxPrice = this.productsFilterService.maxPrice;
@@ -19,13 +22,11 @@ export class FilterPriceComponent {
   setMaxPrice = this.productsFilterService.changeMaxPrice;
   setMinPrice = this.productsFilterService.changeMinPrice;
 
-  constructor(private router: Router) {}
-
   filterByPrice(event: Event) {
     event.preventDefault();
-    this.router.navigate([''], {
+    this.router.navigate([this.page], {
       queryParamsHandling: 'merge',
-      queryParams: this.productsFilterService.filters(),
+      queryParams: this.productsFilterService.filters,
     });
     this.scrollService.scrollToMain();
   }

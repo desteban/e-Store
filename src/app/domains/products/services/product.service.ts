@@ -7,7 +7,7 @@ import {
 } from '../../../shared/models/Product.model';
 import FiltersProducts from '../models/FiltersProducts';
 import { Pagination } from '@app/shared/models/Pagination';
-import { Observable, retry } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 
 interface getProductsProps extends FiltersProducts, Pagination {}
 
@@ -125,6 +125,15 @@ export class ProductService {
 
   public delete(id: string): Observable<boolean> {
     const url = this.url + `/${id}`;
-    return this.http.delete<boolean>(url).pipe(retry(this.retry));
+    return this.http.delete<boolean>(url).pipe(
+      retry(this.retry),
+      catchError((err) => {
+        if (err.status === 0) {
+          console.error('Sin conexión');
+        }
+
+        return throwError(() => err);
+      })
+    );
   }
 }
