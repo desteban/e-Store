@@ -1,5 +1,6 @@
 import {
   HttpClient,
+  HttpContext,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
@@ -7,6 +8,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthLogin, RefreshingAccessToken, Tokens } from '../models/Auth';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { User } from '../models/User';
+import { checkTimeContext } from '../interceptors/TimeRequestInterceptor';
 
 @Injectable({
   providedIn: 'root',
@@ -133,7 +135,8 @@ export class AuthService {
     const url: string = `${this.baseUrl}/profile`;
     const token: string | undefined = this.accessToken;
     let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const context: HttpContext = new HttpContext().set(checkTimeContext, true);
 
-    return this.http.get<User>(url, { headers });
+    return this.http.get<User>(url, { headers, context });
   }
 }

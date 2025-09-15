@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     // realizar llamadas http
     provideHttpClient(
       withInterceptors([
-        // TimeRequestInterceptor,
+        TimeRequestInterceptor,
         AuthInterceptor,
       ])
     ),
