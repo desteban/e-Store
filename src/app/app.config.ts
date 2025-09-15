@@ -5,9 +5,11 @@ import {
   withComponentInputBinding,
   withPreloading,
 } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { TimeRequestInterceptor } from './shared/interceptors/TimeRequestInterceptor';
+import { AuthInterceptor } from './shared/interceptors/Auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +22,11 @@ export const appConfig: ApplicationConfig = {
       withPreloading(PreloadAllModules)
     ),
     // realizar llamadas http
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([
+        // TimeRequestInterceptor,
+        AuthInterceptor,
+      ])
+    ),
   ],
 };

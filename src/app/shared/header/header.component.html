@@ -41,7 +41,12 @@
       </div>
       <div class="flex items-center">
         @if(!!userLoggedIn){
-        <a href="#">Profile</a>
+        <!-- <a href="#">Profile</a> -->
+        <button type="button" (click)="getProfile()">Profile</button>
+        }
+        <!--  -->
+        @if(!userLoggedIn){
+        <a routerLink="/login">LogIn</a>
         }
 
         <button class="px-4 relative" (click)="toggleSideMenu()">

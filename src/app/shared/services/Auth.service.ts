@@ -1,7 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthLogin, RefreshingAccessToken, Tokens } from '../models/Auth';
-import { catchError, map, of, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root',
@@ -84,7 +89,14 @@ export class AuthService {
     this.refreshToken = refresh_token;
   }
 
-  private get accessToken(): string | undefined {
+  get accessToken(): string | undefined {
+    const token: string | undefined = this._accessToken;
+    if (token === undefined) {
+      const currentToken: string | undefined =
+        localStorage.getItem('_rfa') ?? undefined;
+      this._accessToken = currentToken;
+    }
+
     return this._accessToken;
   }
 
@@ -115,5 +127,13 @@ export class AuthService {
   public isUserLoggedIn(): boolean {
     const tk = this.refreshToken;
     return tk !== null && tk.length !== 0;
+  }
+
+  public profile(): Observable<User> {
+    const url: string = `${this.baseUrl}/profile`;
+    const token: string | undefined = this.accessToken;
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<User>(url, { headers });
   }
 }

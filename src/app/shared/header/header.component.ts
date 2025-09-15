@@ -23,4 +23,12 @@ export class HeaderComponent {
   toggleSideMenu() {
     this.hideSideMenu.update((prev) => !prev);
   }
+
+  public getProfile() {
+    this.autService.profile().subscribe({
+      next: (profile) => {
+        console.log('Profile', profile);
+      },
+    });
+  }
 }
