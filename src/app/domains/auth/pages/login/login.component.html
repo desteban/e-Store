@@ -1,0 +1,50 @@
+<main>
+  <section
+    class="container h-dvh flex items-center justify-center"
+    aria-describedby="login"
+  >
+    <div class="w-full max-w-md p-4 rounded-md shadow-md">
+      <h1 id="login">Login</h1>
+      <form
+        [formGroup]="loginForm"
+        (submit)="Login($event)"
+        class="w-full space-y-3"
+      >
+        @if ( errorForm !== null ) {
+        <span class="rounded-md bg-red-400 text-black p-4 w-full block">
+          {{ errorForm }}
+        </span>
+        }
+
+        <div>
+          <components-ui-input
+            id="user"
+            name="user"
+            label="User"
+            placeHolder="mail@mail.com"
+            formControlName="user"
+            [error]="MatchErrors('user')"
+          />
+        </div>
+
+        <div>
+          <components-ui-input
+            id="password"
+            name="password"
+            label="Password"
+            placeHolder="yor-password"
+            formControlName="password"
+            type="password"
+            [error]="MatchErrors('password')"
+          />
+        </div>
+
+        <div class="mt-6">
+          <button type="submit" class="w-full bg-blue-500 font-semibold">
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>

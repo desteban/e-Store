@@ -42,6 +42,10 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'login',
+    loadComponent: () => import('@domains/auth/pages/login/login.component'),
+  },
+  {
     path: '**',
     loadComponent: () => import('@domains/error/not-found/not-found.component'),
   },

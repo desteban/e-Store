@@ -40,6 +40,10 @@
         </ul>
       </div>
       <div class="flex items-center">
+        @if(!!userLoggedIn){
+        <a href="#">Profile</a>
+        }
+
         <button class="px-4 relative" (click)="toggleSideMenu()">
           @if (sizeCart() !== 0) {
           <span class="cart-item">{{ sizeCart() }}</span>

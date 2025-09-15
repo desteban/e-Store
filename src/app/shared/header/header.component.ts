@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { ProductComponent } from './product/product.component';
 import { CartService } from '../services/cart.service';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { AuthService } from '../services/Auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,8 @@ import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 })
 export class HeaderComponent {
   private cartService = inject(CartService);
+  private autService: AuthService = inject(AuthService);
+  userLoggedIn: boolean = this.autService.isUserLoggedIn();
   hideSideMenu = signal(true);
   cart = this.cartService.cart;
   totalPrice = this.cartService.totalPriceCart;
