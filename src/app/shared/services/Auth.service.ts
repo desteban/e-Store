@@ -139,4 +139,8 @@ export class AuthService {
 
     return this.http.get<User>(url, { headers, context });
   }
+
+  public logout() {
+    this.accessToken = undefined;
+  }
 }

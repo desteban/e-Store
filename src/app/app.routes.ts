@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { WithHeaderComponent } from './layouts/with-header/with-header.component';
+import { authGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -28,11 +29,13 @@ export const routes: Routes = [
         path: 'product/new',
         loadComponent: () =>
           import('@domains/products/pages/add-product/add-product.component'),
+        canActivate: [authGuard],
       },
       {
         path: 'products/edit',
         loadComponent: () =>
           import('@domains/products/pages/edit-product/edit-product.component'),
+        canActivate: [authGuard],
       },
       {
         path: 'product/:id',
